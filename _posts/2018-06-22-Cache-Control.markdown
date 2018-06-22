@@ -50,6 +50,8 @@ html资源设置Cache-Control='public, max-age=0'，此时WKWebView默认每次�
 #### 第三中情况
 WKWebView的request设置为NSURLRequestReturnCacheDataDontLoad，如果本地没有缓存则第一次加载失败，reload会从server请求。如果本地有缓存，第一次会使用本地缓存，之后reload会请求server。
 
+**WKWebView中请求一个url，第一次加载会使用Cache-Control策略，之后在同一个WKWebView中在此加载这个url时Cache-Control策略无效，会请求server**
+
 ### ETag的使用
 response中的header中返回的字段"ETag"="af-k59S5WU6TaRZGFycLip4kzlBkQ8"，由server产生，作为资源实体的hash值 返回给client。
 
