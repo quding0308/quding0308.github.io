@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-22T16:39:07+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308’s blog</title><entry><title type="html">跨域问题总结</title><link href="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html" rel="alternate" type="text/html" title="跨域问题总结" /><published>2018-06-22T15:40:05+08:00</published><updated>2018-06-22T15:40:05+08:00</updated><id>http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html">&lt;h3 id=&quot;同源策略&quot;&gt;同源策略&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-22T16:42:24+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308’s blog</title><entry><title type="html">跨域问题总结</title><link href="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html" rel="alternate" type="text/html" title="跨域问题总结" /><published>2018-06-22T15:40:05+08:00</published><updated>2018-06-22T15:40:05+08:00</updated><id>http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html">&lt;h3 id=&quot;同源策略&quot;&gt;同源策略&lt;/h3&gt;
 &lt;p&gt;两个页面地址中的协议、域名和端口号一致，则表示同源。&lt;/p&gt;
 
 &lt;h3 id=&quot;跨域请求&quot;&gt;跨域请求&lt;/h3&gt;
@@ -17,7 +17,7 @@
 &lt;ul&gt;
   &lt;li&gt;jsonp 可以跨域发起get请求&lt;/li&gt;
   &lt;li&gt;iframe&lt;/li&gt;
-  &lt;li&gt;后台服务器做代理&lt;/li&gt;
+  &lt;li&gt;后台服务器做代理(先将请求发送给后台服务器，通过服务器来发送请求，然后将请求的结果传递给前端。)&lt;/li&gt;
   &lt;li&gt;CORS (Cross-Origin Resource Sharing) W3C官方解决方案&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -50,6 +50,8 @@ Access-Control-Max-Age: 86400
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;OPTIONS成功请求后，会发送实际请求。&lt;/p&gt;
+
+&lt;p&gt;跨域请求，会有一个请求头Origin，记录当前页面的域名。&lt;/p&gt;
 
 &lt;p&gt;参考&lt;/p&gt;
 &lt;ul&gt;

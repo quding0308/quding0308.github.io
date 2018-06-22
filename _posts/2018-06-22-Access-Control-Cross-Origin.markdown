@@ -21,7 +21,7 @@ categories: blog
 ### Ajax跨域解决方案：
 - jsonp 可以跨域发起get请求
 - iframe
-- 后台服务器做代理
+- 后台服务器做代理(先将请求发送给后台服务器，通过服务器来发送请求，然后将请求的结果传递给前端。)
 - CORS (Cross-Origin Resource Sharing) W3C官方解决方案
 
 ### CORS协议
@@ -52,6 +52,7 @@ OPTIONS Response响应：
 
 OPTIONS成功请求后，会发送实际请求。
 
+跨域请求，会有一个请求头Origin，记录当前页面的域名。
 
 参考
 - CORS官方介绍：<https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS>
