@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-22T14:43:12+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308的博客</title><entry><title type="html">Cache-Control使用总结</title><link href="http://localhost:4000/blog/http/2018/06/22/Cache-Control.html" rel="alternate" type="text/html" title="Cache-Control使用总结" /><published>2018-06-22T10:05:05+08:00</published><updated>2018-06-22T10:05:05+08:00</updated><id>http://localhost:4000/blog/http/2018/06/22/Cache-Control</id><content type="html" xml:base="http://localhost:4000/blog/http/2018/06/22/Cache-Control.html">&lt;h3 id=&quot;request中设置cache-control&quot;&gt;Request中设置Cache-Control&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-22T16:39:07+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308’s blog</title><entry><title type="html">跨域问题总结</title><link href="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html" rel="alternate" type="text/html" title="跨域问题总结" /><published>2018-06-22T15:40:05+08:00</published><updated>2018-06-22T15:40:05+08:00</updated><id>http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html">&lt;h3 id=&quot;同源策略&quot;&gt;同源策略&lt;/h3&gt;
+&lt;p&gt;两个页面地址中的协议、域名和端口号一致，则表示同源。&lt;/p&gt;
+
+&lt;h3 id=&quot;跨域请求&quot;&gt;跨域请求&lt;/h3&gt;
+&lt;p&gt;凡是发送url的scheme、host、port任一与当前页面地址不同，即为跨域。&lt;/p&gt;
+
+&lt;h3 id=&quot;为了安全同源策略有以下限制&quot;&gt;为了安全，同源策略有以下限制：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;存储在浏览器中的数据，如cookie、localStorage、indexDB不能通过脚本跨域访问。&lt;/li&gt;
+  &lt;li&gt;不能通过脚本操作不同域下的dom&lt;/li&gt;
+  &lt;li&gt;Ajax不能跨域请求数据&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;ajax跨域解决方案&quot;&gt;Ajax跨域解决方案：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;jsonp 可以跨域发起get请求&lt;/li&gt;
+  &lt;li&gt;iframe&lt;/li&gt;
+  &lt;li&gt;后台服务器做代理&lt;/li&gt;
+  &lt;li&gt;CORS (Cross-Origin Resource Sharing) W3C官方解决方案&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cors协议&quot;&gt;CORS协议&lt;/h3&gt;
+
+&lt;p&gt;浏览器必须首先使用 OPTIONS 方法发起一个预检请求（preflight request），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。&lt;/p&gt;
+
+&lt;h4 id=&quot;cors协议中的options请求&quot;&gt;CORS协议中的OPTIONS请求&lt;/h4&gt;
+
+&lt;p&gt;OPTIONS 是 HTTP/1.1 协议中定义的方法，用以从服务器获取更多信息。&lt;/p&gt;
+
+&lt;p&gt;OPTIONS Request会携带两个首部字段：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 告知server，实际请求是POST
+Access-Control-Request-Method: POST
+// 告知Server，实际请求会携带两个自定义首部字段
+Access-Control-Request-Headers: X-PINGOTHER, Content-Type
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;OPTIONS Response响应：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// 允许指定域名进行跨域请求
+Access-Control-Allow-Origin: http://foo.example
+// 允许实际请求发起的METHOD
+Access-Control-Allow-Methods: POST, GET, OPTIONS
+// 允许携带的header
+Access-Control-Allow-Headers: X-PINGOTHER, Content-Type
+// 该响应有效时间，该时间内无法再次发起OPTIONS请求
+Access-Control-Max-Age: 86400
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;OPTIONS成功请求后，会发送实际请求。&lt;/p&gt;
+
+&lt;p&gt;参考&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CORS官方介绍：&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS&quot;&gt;https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/dojo-lzz/p/4265637.html&quot;&gt;https://www.cnblogs.com/dojo-lzz/p/4265637.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/hehexiaoxia/article/details/61916737&quot;&gt;https://blog.csdn.net/hehexiaoxia/article/details/61916737&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">同源策略 两个页面地址中的协议、域名和端口号一致，则表示同源。</summary></entry><entry><title type="html">Cache-Control使用总结</title><link href="http://localhost:4000/blog/http/2018/06/22/Cache-Control.html" rel="alternate" type="text/html" title="Cache-Control使用总结" /><published>2018-06-22T10:05:05+08:00</published><updated>2018-06-22T10:05:05+08:00</updated><id>http://localhost:4000/blog/http/2018/06/22/Cache-Control</id><content type="html" xml:base="http://localhost:4000/blog/http/2018/06/22/Cache-Control.html">&lt;h3 id=&quot;request中设置cache-control&quot;&gt;Request中设置Cache-Control&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;no-cache&lt;/li&gt;
   &lt;li&gt;no-store&lt;/li&gt;
