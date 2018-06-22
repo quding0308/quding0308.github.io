@@ -1,8 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-22T11:07:44+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308的博客</title><entry><title type="html">Cache-Control使用总结</title><link href="http://localhost:4000/blog/2018/06/22/Cache-Control.html" rel="alternate" type="text/html" title="Cache-Control使用总结" /><published>2018-06-22T10:05:05+08:00</published><updated>2018-06-22T10:05:05+08:00</updated><id>http://localhost:4000/blog/2018/06/22/Cache-Control</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/22/Cache-Control.html">&lt;h4 id=&quot;request中设置cache-control&quot;&gt;Request中设置Cache-Control&lt;/h4&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-22T14:29:59+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308的博客</title><entry><title type="html">Cache-Control使用总结</title><link href="http://localhost:4000/blog,/etag/2018/06/22/Cache-Control.html" rel="alternate" type="text/html" title="Cache-Control使用总结" /><published>2018-06-22T10:05:05+08:00</published><updated>2018-06-22T10:05:05+08:00</updated><id>http://localhost:4000/blog,/etag/2018/06/22/Cache-Control</id><content type="html" xml:base="http://localhost:4000/blog,/etag/2018/06/22/Cache-Control.html">&lt;h3 id=&quot;request中设置cache-control&quot;&gt;Request中设置Cache-Control&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;no-cache&lt;/li&gt;
+  &lt;li&gt;no-store&lt;/li&gt;
+  &lt;li&gt;max-age&lt;/li&gt;
+  &lt;li&gt;max-stale&lt;/li&gt;
+  &lt;li&gt;min-fresh&lt;/li&gt;
+  &lt;li&gt;no-transform&lt;/li&gt;
+  &lt;li&gt;only-if-cached&lt;/li&gt;
+  &lt;li&gt;cache-extension&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h4 id=&quot;response中设置cache-control&quot;&gt;Response中设置Cache-control&lt;/h4&gt;
+&lt;h3 id=&quot;response中设置cache-control&quot;&gt;Response中设置Cache-control&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;public&lt;/li&gt;
+  &lt;li&gt;private&lt;/li&gt;
+  &lt;li&gt;no-cache&lt;/li&gt;
+  &lt;li&gt;no-store&lt;/li&gt;
+  &lt;li&gt;no-transform&lt;/li&gt;
+  &lt;li&gt;max-age(单位s)&lt;/li&gt;
+  &lt;li&gt;must-revalidate&lt;/li&gt;
+  &lt;li&gt;s-maxage&lt;/li&gt;
+  &lt;li&gt;cache-extension&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h4 id=&quot;ios中request设置cachepolicy&quot;&gt;iOS中Request设置cachePolicy&lt;/h4&gt;</content><author><name></name></author><summary type="html">Request中设置Cache-Control</summary></entry><entry><title type="html">Markdown使用</title><link href="http://localhost:4000/blog/2018/06/11/markdown.html" rel="alternate" type="text/html" title="Markdown使用" /><published>2018-06-11T10:05:05+08:00</published><updated>2018-06-11T10:05:05+08:00</updated><id>http://localhost:4000/blog/2018/06/11/markdown</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/11/markdown.html">&lt;h3 id=&quot;markdown语法&quot;&gt;Markdown语法&lt;/h3&gt;
+&lt;h3 id=&quot;ios中request设置cachepolicy&quot;&gt;iOS中Request设置cachePolicy&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// NSURLRequestCachePolicy
+// 使用网络协议中实现的缓存策略(Cache-Control)
+NSURLRequestUseProtocolCachePolicy
+
+// 不使用本地缓存，从server加载。如果一个资源设置了 setHeader('Cache-Control', 'public, max-age=3600')，可以用这种策略强制重新加载
+NSURLRequestReloadIgnoringLocalCacheData
+
+// 无论缓存是否过期，先使用本地缓存。如果没有缓存，才从server加载
+NSURLRequestReturnCacheDataElseLoad
+
+// 无论缓存是否过期，先使用本地缓存数据。如果缓存中没有请求所对应的数据，那么放弃从原始地址加载数据，请求视为失败
+NSURLRequestReturnCacheDataDontLoad
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;wkwebvview与nsurlrequestcachepolicy配合使用&quot;&gt;WKWebvView与NSURLRequestCachePolicy配合使用&lt;/h3&gt;
+&lt;h4 id=&quot;第一种情况&quot;&gt;第一种情况&lt;/h4&gt;
+&lt;p&gt;html资源设置Cache-Control=’public, max-age=3600’，此时WKWebView第一次加载该html时会使用本地缓存，重新load时，会忽略Cache-Control，从server请求。WKWebView的request如果设置为NSURLRequestReloadIgnoringLocalCacheData，则html的第一次请求也会忽略本地缓存，从server请求。&lt;/p&gt;
+&lt;h4 id=&quot;第二种情况&quot;&gt;第二种情况&lt;/h4&gt;
+&lt;p&gt;html资源设置Cache-Control=’public, max-age=0’，此时WKWebView默认每次都会从server请求。如果WKWebView的请求设置为NSURLRequestReturnCacheDataElseLoad，则第一次请求会本地缓存，之后重新reload会请求server。&lt;/p&gt;
+&lt;h4 id=&quot;第三中情况&quot;&gt;第三中情况&lt;/h4&gt;
+&lt;p&gt;WKWebView的request设置为NSURLRequestReturnCacheDataDontLoad，如果本地没有缓存则第一次加载失败，reload会从server请求。如果本地有缓存，第一次会使用本地缓存，之后reload会请求server。&lt;/p&gt;
+
+&lt;h3 id=&quot;etag的使用&quot;&gt;ETag的使用&lt;/h3&gt;
+&lt;p&gt;response中的header中返回的字段”ETag”=”af-k59S5WU6TaRZGFycLip4kzlBkQ8”，由server产生，作为资源实体的hash值 返回给client。&lt;/p&gt;
+
+&lt;p&gt;发起reqeust时，可以在header中设置If-None-Match字段，把之前的ETag字段传给server，server比较ETag字段，如果相等则返回304，告知client使用本地缓存（不用返回数据，节省流量，加快请求速度）。&lt;/p&gt;
+
+&lt;p&gt;ETag的优先级高于Last-Modified&lt;/p&gt;
+
+&lt;p&gt;304 Not Modified&lt;/p&gt;
+
+&lt;h3 id=&quot;last-modified-和-if-modified-since&quot;&gt;Last-Modified 和 If-Modified-Since&lt;/h3&gt;
+
+&lt;p&gt;Last-Modified与Etag类似，Last-Modified表示响应资源在服务器最后修改时间。&lt;/p&gt;
+
+&lt;p&gt;response 返回Last-Modified，资源的最后修改时间。
+request 在header中带参数If-Modified-Since，把上一次获取的Last-Modified数据返回给server，server
+通过比较时间，决定是否返回304.&lt;/p&gt;
+
+&lt;p&gt;Last-Modified相比ETag有比几个不足：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Last-Modified标注的最后修改只能精确到秒级，如果某些文件在1秒钟以内，被修改多次的话，它将不能准确标注文件的修改时间&lt;/li&gt;
+  &lt;li&gt;如果某些文件会被定期生成，当有时内容并没有任何变化，但Last-Modified却改变了，导致文件没法使用缓存&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;参考：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://nshipster.cn/nsurlcache/&quot;&gt;http://nshipster.cn/nsurlcache/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9&quot;&gt;https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/softidea/p/5986339.html&quot;&gt;https://www.cnblogs.com/softidea/p/5986339.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Request中设置Cache-Control no-cache no-store max-age max-stale min-fresh no-transform only-if-cached cache-extension</summary></entry><entry><title type="html">Markdown使用</title><link href="http://localhost:4000/blog/2018/06/11/markdown.html" rel="alternate" type="text/html" title="Markdown使用" /><published>2018-06-11T10:05:05+08:00</published><updated>2018-06-11T10:05:05+08:00</updated><id>http://localhost:4000/blog/2018/06/11/markdown</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/11/markdown.html">&lt;h3 id=&quot;markdown语法&quot;&gt;Markdown语法&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;标题、正文 快捷键显示&lt;/li&gt;
   &lt;li&gt;图片&lt;/li&gt;
