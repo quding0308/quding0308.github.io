@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "Markdown使用"
+date:   2018-06-11 10:05:05 +0800
+categories: blog
+---
+### Markdown语法
+- 标题、正文 快捷键显示
+- 图片
+- 代码 四个空格所进的行
+- 断行  在行尾输入两个以上空格，然后回车
+- 引用 在引用的段落开头加上右尖括号
+- 水平分区线   单独一行里有3个以上星号
+
+#### 引用 
+> 这是一段引用文字，测试用
+> 这是一段引用文字
+> 
+> 这是一段引用文字
+
+#### 代码
+    
+    let x: Int = 0
+    var y = x
+
+
+#### 图片
+![这是一个图片，替代文字](http://iconfont.alicdn.com/t/1527089172740.jpg@200h_200w.jpg)
+
+wiki地址：[https://zh.wikipedia.org/wiki/Markdown](https://zh.wikipedia.org/wiki/Markdown)   
+参考：<http://wowubuntu.com/markdown/#code>
+
+***
+
+### VSCode中Markdown All in One插件的使用
+
+#### 快捷键
+- 加粗 command + b
+- 斜体 command + i
+- 字体加横线 option + s
+- 标题 ctrl + shift + [ 或 ctrl + shift + ]
+- 进入math环境 ctrol + m
+  - $x + y = z$
+
+#### Task List
+  - [ ] task1 to do
+  - [x] task2 finished
+
+插件地址：[https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)

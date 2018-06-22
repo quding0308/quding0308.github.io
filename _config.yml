@@ -21,12 +21,12 @@ title: quding0308的博客
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://blog.quding0308.com" # the base hostname & protocol for your site, e.g. http://example.com
 # twitter_username: quding0308
-github_username:  quding0308
+# github_username:  quding0308
 
 # Build settings
 markdown: kramdown
 theme: minima
-plugins:
+# plugins:
   # - jekyll-feed
 
 # Exclude from processing.

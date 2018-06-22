@@ -1,25 +1,259 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-11T16:31:19+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308的博客</title><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2018/06/11/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2018-06-11T10:05:05+08:00</published><updated>2018-06-11T10:05:05+08:00</updated><id>http://localhost:4000/jekyll/update/2018/06/11/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2018/06/11/welcome-to-jekyll.html">&lt;p&gt;你好 You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-22T10:38:04+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308的博客</title><entry><title type="html">Cache-Control使用总结</title><link href="http://localhost:4000/blog/2018/06/22/Cache-Control.html" rel="alternate" type="text/html" title="Cache-Control使用总结" /><published>2018-06-22T10:05:05+08:00</published><updated>2018-06-22T10:05:05+08:00</updated><id>http://localhost:4000/blog/2018/06/22/Cache-Control</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/22/Cache-Control.html">&lt;p&gt;&lt;strong&gt;VSCode中Markdown All in One插件的使用&lt;/strong&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">VSCode中Markdown All in One插件的使用</summary></entry><entry><title type="html">Markdown使用</title><link href="http://localhost:4000/blog/2018/06/11/markdown.html" rel="alternate" type="text/html" title="Markdown使用" /><published>2018-06-11T10:05:05+08:00</published><updated>2018-06-11T10:05:05+08:00</updated><id>http://localhost:4000/blog/2018/06/11/markdown</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/11/markdown.html">&lt;h3 id=&quot;markdown语法&quot;&gt;Markdown语法&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;标题、正文 快捷键显示&lt;/li&gt;
+  &lt;li&gt;图片&lt;/li&gt;
+  &lt;li&gt;代码 四个空格所进的行&lt;/li&gt;
+  &lt;li&gt;断行  在行尾输入两个以上空格，然后回车&lt;/li&gt;
+  &lt;li&gt;引用 在引用的段落开头加上右尖括号&lt;/li&gt;
+  &lt;li&gt;水平分区线   单独一行里有3个以上星号&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;h4 id=&quot;引用&quot;&gt;引用&lt;/h4&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;这是一段引用文字，测试用
+这是一段引用文字&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+  &lt;p&gt;这是一段引用文字&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;h4 id=&quot;代码&quot;&gt;代码&lt;/h4&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">你好 You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Hello!</title><link href="http://localhost:4000/jekyll/update/2018/06/10/hello.html" rel="alternate" type="text/html" title="Hello!" /><published>2018-06-10T10:05:05+08:00</published><updated>2018-06-10T10:05:05+08:00</updated><id>http://localhost:4000/jekyll/update/2018/06/10/hello</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2018/06/10/hello.html">&lt;p&gt;你好111 You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;let x: Int = 0
+var y = x
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;h4 id=&quot;图片&quot;&gt;图片&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;http://iconfont.alicdn.com/t/1527089172740.jpg@200h_200w.jpg&quot; alt=&quot;这是一个图片，替代文字&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+&lt;p&gt;wiki地址：&lt;a href=&quot;https://zh.wikipedia.org/wiki/Markdown&quot;&gt;https://zh.wikipedia.org/wiki/Markdown&lt;/a&gt; &lt;br /&gt;
+参考：&lt;a href=&quot;http://wowubuntu.com/markdown/#code&quot;&gt;http://wowubuntu.com/markdown/#code&lt;/a&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">你好111 You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
+&lt;h3 id=&quot;vscode中markdown-all-in-one插件的使用&quot;&gt;VSCode中Markdown All in One插件的使用&lt;/h3&gt;
+
+&lt;h4 id=&quot;快捷键&quot;&gt;快捷键&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;加粗 command + b&lt;/li&gt;
+  &lt;li&gt;斜体 command + i&lt;/li&gt;
+  &lt;li&gt;字体加横线 option + s&lt;/li&gt;
+  &lt;li&gt;标题 ctrl + shift + [ 或 ctrl + shift + ]&lt;/li&gt;
+  &lt;li&gt;进入math环境 ctrol + m
+    &lt;ul&gt;
+      &lt;li&gt;$x + y = z$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;task-list&quot;&gt;Task List&lt;/h4&gt;
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;task1 to do&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;task2 finished&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;插件地址：&lt;a href=&quot;https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one&quot;&gt;https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><summary type="html">Markdown语法 标题、正文 快捷键显示 图片 代码 四个空格所进的行 断行 在行尾输入两个以上空格，然后回车 引用 在引用的段落开头加上右尖括号 水平分区线 单独一行里有3个以上星号</summary></entry><entry><title type="html">常用英文及缩写</title><link href="http://localhost:4000/blog/2018/06/10/%E5%B8%B8%E7%94%A8%E8%8B%B1%E8%AF%AD%E5%8F%8A%E7%BC%A9%E5%86%99.html" rel="alternate" type="text/html" title="常用英文及缩写" /><published>2018-06-10T10:05:05+08:00</published><updated>2018-06-10T10:05:05+08:00</updated><id>http://localhost:4000/blog/2018/06/10/%E5%B8%B8%E7%94%A8%E8%8B%B1%E8%AF%AD%E5%8F%8A%E7%BC%A9%E5%86%99</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/10/%E5%B8%B8%E7%94%A8%E8%8B%B1%E8%AF%AD%E5%8F%8A%E7%BC%A9%E5%86%99.html">&lt;h4 id=&quot;常用缩写&quot;&gt;常用缩写&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A
+average ——&amp;gt; avg
+
+B
+back ——&amp;gt; bk
+background ——&amp;gt; bg
+break ——&amp;gt; brk
+buffer ——&amp;gt; buf
+
+C
+color ——&amp;gt; cr(clr)
+control ——&amp;gt; ctrl
+
+D
+data ——&amp;gt; dat
+delete ——&amp;gt; del
+document ——&amp;gt; doc
+
+E
+edit ——&amp;gt; edt
+error ——&amp;gt; err
+escape ——&amp;gt; esc
+
+F
+flag ——&amp;gt; flg
+form ——&amp;gt; frm
+
+G
+grid ——&amp;gt; grd
+
+I
+increment ——&amp;gt; inc
+information ——&amp;gt; info
+initial ——&amp;gt; init
+insert ——&amp;gt; ins
+image ——&amp;gt; img
+
+L
+label ——&amp;gt; lab
+length ——&amp;gt; len
+list ——&amp;gt; lst
+library ——&amp;gt; lib
+
+M
+manager ——&amp;gt; mngr(mgr)
+message ——&amp;gt; msg
+
+O
+Oracle ——&amp;gt; Ora
+
+P
+panorama ——&amp;gt; pano
+password ——&amp;gt; pwd
+picture ——&amp;gt; pic
+point ——&amp;gt; pt
+position ——&amp;gt; pos
+print ——&amp;gt; prn
+program ——&amp;gt; prg
+
+S
+server ——&amp;gt; srv
+source ——&amp;gt; src
+statistic ——&amp;gt; stat
+string ——&amp;gt; str
+Sybase ——&amp;gt; Syb
+
+T
+temp ——&amp;gt; tmp
+text ——&amp;gt; txt
+
+U
+user ——&amp;gt; usr
+
+W
+window ——&amp;gt; wnd(win)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;通用缩写表&quot;&gt;通 用 缩 写 表&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;缩 写	全 称
+addr	Address
+adm	Administrator
+app	Application
+arg	Argument
+asm	assemble
+asyn	asynchronization
+avg	average
+DB	Database
+bk	back
+bmp	Bitmap
+btn	Button
+buf	Buffer
+calc	Calculate
+char	Character
+chg	Change
+clk	Click
+clr	color
+cmd	Command
+cmp	Compare
+col	Column
+coord	coordinates
+cpy	copy
+ctl / ctrl	Control
+cur	Current
+cyl	Cylinder
+dbg	Debug
+dbl	Double
+dec	Decrease
+def	default
+del	Delete
+dest / dst	Destination
+dev	Device
+dict	dictionary
+diff	different
+dir	directory
+disp	Display
+div	Divide
+缩 写	全 称
+dlg	Dialog
+doc	Document
+drv	Driver
+dyna	Dynamic
+env	Environment
+err	error
+ex/ext	Extend
+exec	execute
+flg	flag
+frm	Frame
+func / fn	Function
+grp	group
+horz	Horizontal
+idx / ndx	Index
+img	Image
+impl	Implement
+inc	Increase
+info	Information
+init	Initial/Initialize/Initialization
+ins	Insert
+inst	Instance
+INT / intr	Interrupt
+len	Length
+lib	Library
+lnk	Link
+log	logical
+lst	List
+max	maximum
+mem	Memory
+mgr / man	Manage / Manager
+mid	middle
+min	minimum
+msg	Message
+mul	Multiply
+num	Number
+obj	Object
+ofs	Offset
+org	Origin / Original
+param	Parameter
+pic	picture
+pkg	package
+pnt / pt	Point
+pos	Position
+pre / prev	previous
+缩 写	全 称
+prg	program
+prn	Print
+proc	Process / Procedure
+prop	Properties
+psw	Password
+ptr	Pointer
+pub	Public
+rc	rect
+ref	Reference
+reg	Register
+req	request
+res	Resource
+ret	return
+rgn	region
+scr	screen
+sec	Second
+seg	Segment
+sel	Select
+src	Source
+std	Standard
+stg	Storage
+stm	Stream
+str	String
+sub	Subtract
+sum	summation
+svr	Server
+sync	Synchronization
+sys	System
+tbl	Table
+temp / tmp	Temporary
+tran / trans	translate/transation/transparent
+tst	Test
+txt	text
+unk	Unknown
+upd	Update
+upg	Upgrade
+util	Utility
+var	Variable
+ver	Version
+vert	Vertical
+vir	Virus
+wnd	Window
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">常用缩写 A average ——&amp;gt; avg</summary></entry></feed>
