@@ -25,6 +25,14 @@ a和b共有的倍数，叫**公倍数**
 
 定理：(a,b) * [a,b] = ab
 
+  gcd = (a, b) -> gcd = (a, b) # 最大公约数     
+  return gcd b, a if a < b     
+  if b is 0 then a else gcd a % b 
+ 
+  scm = (a,b)->  # 求最小公倍数
+  a * b / gcd(a, b)
+
+
 **自然数**包括0和正整数。
 
 任何正整数都是0的约数。
