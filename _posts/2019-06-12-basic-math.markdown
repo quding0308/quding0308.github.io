@@ -30,7 +30,9 @@ a和b共有的倍数，叫**公倍数**
   if b is 0 then a else gcd a % b 
  
   scm = (a,b)->  # 求最小公倍数
-  a * b / gcd(a, b)
+  a * b / gcd(a, b)    
+  
+  https://baike.baidu.com/item/%E7%BA%A6%E6%95%B0/8417882?fr=aladdin
 
 
 **自然数**包括0和正整数。
