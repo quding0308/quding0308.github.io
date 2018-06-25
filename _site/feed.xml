@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-22T17:16:39+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308’s blog</title><entry><title type="html">跨域问题总结</title><link href="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html" rel="alternate" type="text/html" title="跨域问题总结" /><published>2018-06-22T15:40:05+08:00</published><updated>2018-06-22T15:40:05+08:00</updated><id>http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html">&lt;h3 id=&quot;同源策略&quot;&gt;同源策略&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-25T09:33:34+08:00</updated><id>http://localhost:4000/</id><title type="html">quding0308’s blog</title><entry><title type="html">跨域问题总结</title><link href="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html" rel="alternate" type="text/html" title="跨域问题总结" /><published>2018-06-22T15:40:05+08:00</published><updated>2018-06-22T15:40:05+08:00</updated><id>http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/22/Access-Control-Cross-Origin.html">&lt;h3 id=&quot;同源策略&quot;&gt;同源策略&lt;/h3&gt;
 &lt;p&gt;两个页面地址中的协议、域名和端口号一致，则表示同源。&lt;/p&gt;
 
 &lt;h3 id=&quot;跨域请求&quot;&gt;跨域请求&lt;/h3&gt;
@@ -137,7 +137,52 @@ request 在header中带参数If-Modified-Since，把上一次获取的Last-Modif
   &lt;li&gt;&lt;a href=&quot;http://nshipster.cn/nsurlcache/&quot;&gt;http://nshipster.cn/nsurlcache/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9&quot;&gt;https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/softidea/p/5986339.html&quot;&gt;https://www.cnblogs.com/softidea/p/5986339.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Request中设置Cache-Control no-cache no-store max-age max-stale min-fresh no-transform only-if-cached cache-extension</summary></entry><entry><title type="html">Markdown使用</title><link href="http://localhost:4000/blog/2018/06/11/markdown.html" rel="alternate" type="text/html" title="Markdown使用" /><published>2018-06-11T10:05:05+08:00</published><updated>2018-06-11T10:05:05+08:00</updated><id>http://localhost:4000/blog/2018/06/11/markdown</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/11/markdown.html">&lt;h3 id=&quot;markdown语法&quot;&gt;Markdown语法&lt;/h3&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Request中设置Cache-Control no-cache no-store max-age max-stale min-fresh no-transform only-if-cached cache-extension</summary></entry><entry><title type="html">数学基础知识</title><link href="http://localhost:4000/blog/2018/06/12/basic-math.html" rel="alternate" type="text/html" title="数学基础知识" /><published>2018-06-12T10:05:05+08:00</published><updated>2018-06-12T10:05:05+08:00</updated><id>http://localhost:4000/blog/2018/06/12/basic-math</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/12/basic-math.html">&lt;h4 id=&quot;倍数与约数&quot;&gt;倍数与约数&lt;/h4&gt;
+&lt;p&gt;整数a除以整数b(b≠0) 除得的商正好是整数而没有余数，我们就说a能被b整除，或b能整除a。&lt;/p&gt;
+
+&lt;p&gt;a称为b的&lt;strong&gt;倍数&lt;/strong&gt;，b称为a的&lt;strong&gt;约数&lt;/strong&gt;。       &lt;/p&gt;
+
+&lt;p&gt;约数和倍数都是二元关系的概念，不能孤立地说某个整数是约数或倍数。&lt;/p&gt;
+
+&lt;p&gt;约数，又称因数。        &lt;/p&gt;
+
+&lt;p&gt;一个整数的约数是有限的。&lt;/p&gt;
+
+&lt;p&gt;如果一个数c既是数a的约数，又是数b的约数，那么c叫做a与b的&lt;strong&gt;公约数&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;两个数的公约数中最大的一个，叫做这两个数的&lt;strong&gt;最大公约数&lt;/strong&gt;，写作(a,b)。&lt;/p&gt;
+
+&lt;p&gt;a和b共有的倍数，叫&lt;strong&gt;公倍数&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;除0以外最小的一个公倍数就叫做a和b的最小公倍数，写作[a,b]。&lt;/p&gt;
+
+&lt;p&gt;定理：(a,b) * [a,b] = ab&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcd = (a, b) -&amp;gt; gcd = (a, b) # 最大公约数     
+return gcd b, a if a &amp;lt; b     
+if b is 0 then a else gcd a % b 
+ 
+scm = (a,b)-&amp;gt;  # 求最小公倍数
+a * b / gcd(a, b)    
+  
+https://baike.baidu.com/item/%E7%BA%A6%E6%95%B0/8417882?fr=aladdin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;自然数&lt;/strong&gt;包括0和正整数。&lt;/p&gt;
+
+&lt;p&gt;任何正整数都是0的约数。&lt;/p&gt;
+
+&lt;p&gt;一个数的约数必然包括1及其本身。&lt;/p&gt;
+
+&lt;h4 id=&quot;质数与合数&quot;&gt;质数与合数&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;质数&lt;/strong&gt;指在大于1的自然数中，除了1和它本身以外不再有其他因数的数。&lt;/p&gt;
+
+&lt;p&gt;质数（prime number）又称素数，有无限个。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;合数&lt;/strong&gt;指自然数中除了能被1和本身整除外，还能被其他数（0除外）整除的数。&lt;/p&gt;
+
+&lt;p&gt;与之相对的是质数，而1既不属于质数也不属于合数。最小的合数是4。&lt;/p&gt;</content><author><name></name></author><summary type="html">倍数与约数 整数a除以整数b(b≠0) 除得的商正好是整数而没有余数，我们就说a能被b整除，或b能整除a。</summary></entry><entry><title type="html">Markdown使用</title><link href="http://localhost:4000/blog/2018/06/11/markdown.html" rel="alternate" type="text/html" title="Markdown使用" /><published>2018-06-11T10:05:05+08:00</published><updated>2018-06-11T10:05:05+08:00</updated><id>http://localhost:4000/blog/2018/06/11/markdown</id><content type="html" xml:base="http://localhost:4000/blog/2018/06/11/markdown.html">&lt;h3 id=&quot;markdown语法&quot;&gt;Markdown语法&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;标题、正文 快捷键显示&lt;/li&gt;
   &lt;li&gt;图片&lt;/li&gt;
