@@ -133,7 +133,7 @@ CocoaPods与Carthage、git submodule、自己手动管理
 
     The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation."
 
-    可以暂时注释 检查的脚本，先运行项目。
+    可以暂时注释脚本，先运行项目。
 
 
 
