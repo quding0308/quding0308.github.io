@@ -2,16 +2,18 @@
 ## CocoaPods在项目中使用
 
 ### 基础知识
-##### 什么是CocoaPods
+#### 什么是CocoaPods
 a dependency manager for Swift and Objective-C Cocoa projects
 
-##### workspace与project
+##### 还有别的工具可以使用吗？
+CocoaPods与Carthage、git submodule、自己手动到入代码、项目依赖
 
-##### 静态库与动态库
+##### CocoaPods与Carthage、git submodule使用的区别
 
-##### Swift中的umbrella与oc的framework
-
-##### .framework/ .a 的区别
+- 复杂度，使用是否方便
+    - 团队是否都掌握了
+    - 修改代码，升级版本
+- 编译时间消耗(Pod编译，iMac下大概25s) 
 
 ### 常用命令
 
@@ -117,28 +119,28 @@ CocoaPods会列出所有在Podfile.lock中的有新版本的pod库。这意味�
 
 
 
-### 其他问题：
+### 其他常见问题：
 
-#### 还有别的工具可以使用吗？
-CocoaPods与Carthage、git submodule、自己手动管理
-
-##### CocoaPods与Carthage、git submodule使用的区别
-
-- 复杂度，使用是否方便
-    - 团队是否都掌握了
-    - 修改代码，升级版本
-- 编译时间消耗(Pod编译，iMac下大概25s) 
-
-经常遇到的警告：
+##### 经常遇到的警告：
 
     The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation."
 
     可以暂时注释脚本，先运行项目。
 
 
+##### 引用Framework时，直接crash
+    
+    // Embeded Pods Framework脚本
+    "${SRCROOT}/Pods/Target Support Files/Pods-HelloPureProject/Pods-HelloPureProject-frameworks.sh"
 
 ### 参考：
 
 - https://reallifeprogramming.com/carthage-vs-cocoapods-vs-git-submodules-9dc341ec6710
 
+### 基础知识
 
+#### workspace与project
+
+#### Swift中的umbrella与oc的framework引用方式
+
+#### .framework/ .a 的区别  静态库与动态库
