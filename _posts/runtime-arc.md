@@ -114,11 +114,12 @@ categories: runtime
 
 
 
-
-
-
-
 #### 实现原理
+#### SideTables() // 64个SideTable对象
 
+    static StripedMap<SideTable>& SideTables() {
+        // 
+        return *reinterpret_cast<StripedMap<SideTable>*>(SideTableBuf);
+    }
 
 
