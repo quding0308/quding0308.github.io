@@ -332,7 +332,7 @@ id2data函数用来获取一个跟obj相对应的SyncData对象。
 
 
 #### 参考：
-- http://mrpeak.cn/blog/synchronized/
+- <http://mrpeak.cn/blog/synchronized/>
 
 
 
