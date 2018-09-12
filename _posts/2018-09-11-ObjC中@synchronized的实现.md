@@ -59,7 +59,7 @@ categories: ObjC, runtime
     }
 
 
-#### static SyncData* id2data(id object, enum usage why);
+**static SyncData* id2data(id object, enum usage why);**
 
 id2data函数用来获取一个跟obj相对应的SyncData对象。
 
@@ -321,7 +321,19 @@ id2data函数用来获取一个跟obj相对应的SyncData对象。
     }
 
 
+#### 总结 
+- @synchronized方便使用，但也是多线程同步机制中最慢的一种
+- 底层使用递归mutex来做同步，可以写@synchronized嵌套的代码，不会导致死锁
+- @synchronized(nil) 不起任何作用。意味着 如果obj的生命周期结束了，同步代码也就失效了
+- obj的作用：synchronized中传入的object的内存地址，被用作key，通过hash map对应的一个系统维护的递归锁
+- 不要使用self作为obj，而是应该声明一个私有的obj来作为key
+- @synchronized如果控制好精度，也不会很慢。精度控制 就是 对obj的使用（如果所有的 @synchronized都使用一个obj，则就会很慢了）。不同数据应该使用不同的obj来控制在最细的粒度
+- 
 
+
+
+#### 参考：
+- http://mrpeak.cn/blog/synchronized/
 
 
 
