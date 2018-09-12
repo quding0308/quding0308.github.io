@@ -328,7 +328,6 @@ id2data函数用来获取一个跟obj相对应的SyncData对象。
 - obj的作用：synchronized中传入的object的内存地址，被用作key，通过hash map对应的一个系统维护的递归锁
 - 不要使用self作为obj，而是应该声明一个私有的obj来作为key
 - @synchronized如果控制好精度，也不会很慢。精度控制 就是 对obj的使用（如果所有的 @synchronized都使用一个obj，则就会很慢了）。不同数据应该使用不同的obj来控制在最细的粒度
-- 
 
 
 
