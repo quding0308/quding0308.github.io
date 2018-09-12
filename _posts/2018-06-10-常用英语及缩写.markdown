@@ -209,3 +209,6 @@ categories: blog
     vert	Vertical
     vir	Virus
     wnd	Window
+
+    decr  decrement  自减
+    incr  increment  自增
