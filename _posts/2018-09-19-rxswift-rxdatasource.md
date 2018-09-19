@@ -4,9 +4,7 @@ title:  "RxSwift-RxDataSources实现原理"
 categories: blog, RxSwift
 ---
 
-### 具体实现
-
-#### SectionModelType协议
+#### 1.SectionModelType协议
 
 SectionModelType协议是数据相关的核心类
 
@@ -22,9 +20,9 @@ SectionModelType协议是数据相关的核心类
 
 
 
-#### TableViewSectionedDataSource是核心类，封装了几个closure用于初始化tableview
+#### 2.TableViewSectionedDataSource
 
-TableViewSectionedDataSource是核心类，封装了几个closure用于初始化tableview
+TableViewSectionedDataSource封装了几个closure用于初始化tableview
 
 	// closure 根据参数indexpath，cellModel(最后一个参数I = S.Item)，返回tableview cell
 	configureCell: ConfigureCell
@@ -53,7 +51,7 @@ TableViewSectionedDataSource是核心类，封装了几个closure用于初始化
 	typealias SectionForSectionIndexTitle = (TableViewSectionedDataSource<S>, _ title: String, _ index: Int) -> Int
 
 
-#### 数据与tableview绑定
+#### 3.数据与tableview绑定
 
 我们定义一个Array<SectionModelType>封装成Observable，当数据有变化时发送signal。TableViewSectionedDataSource内定义好了怎么用数据，收到signal后怎么处理对应的cell。
 
@@ -68,8 +66,9 @@ TableViewSectionedDataSource是核心类，封装了几个closure用于初始化
             .disposed(by: disposeBag)
 			
 
-#### UITableView的Rx
+#### 4.UITableView的Rx中的实现
 	
+代码：https://github.com/ReactiveX/RxSwift/blob/master/RxCocoa/iOS/UITableView%2BRx.swift
 
 ##### 事件处理
 	
