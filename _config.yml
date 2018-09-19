@@ -26,6 +26,21 @@ url: "http://blog.quding0308.com" # the base hostname & protocol for your site, 
 # Build settings
 markdown: kramdown
 theme: minima
+
+# 参考：
+# https://github.com/merenlab/web/blob/master/_config.yml
+# https://github.com/tudelft3d/geo5010/blob/master/_config.yml
+
+
+kramdown:
+  # auto_ids: true
+  footnote_nr: 1
+  # entity_output: as_char
+  toc_levels: 1..4
+  # enable_coderay: false
+
+# permalink:        pretty
+
 # plugins:
   # - jekyll-feed
 

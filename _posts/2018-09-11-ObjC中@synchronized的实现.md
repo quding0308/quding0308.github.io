@@ -5,6 +5,9 @@ title:  "@synchronized底层实现"
 categories: ObjC, runtime
 ---
 
+* 目录
+{:toc}
+
 #### Demo代码：
 
     void hello()
