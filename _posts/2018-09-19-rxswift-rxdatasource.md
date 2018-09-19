@@ -64,7 +64,13 @@ TableViewSectionedDataSource封装了几个closure用于初始化tableview
 	sections.asObservable()
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-			
+
+	// 没有dataSource 在closure中配置
+	viewModel.sections?.asObservable()
+		.bindTo(tableView.rx.items(cellIdentifier: "KDLogCell", cellType: UITableViewCell.self)){
+			(row, elememt, cell) in
+			cell.textLabel?.text = "\(elememt) @row \(row)"
+		}.disposed(by: disposeBag)
 
 #### 4.UITableView的Rx中的实现
 	
