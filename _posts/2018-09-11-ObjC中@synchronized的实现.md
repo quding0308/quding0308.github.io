@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "@synchronized底层实现"
+title:  "@synchronized底层实现原理"
 # date:   2018-09-11 10:05:05 +0800
 categories: ObjC, runtime
 ---

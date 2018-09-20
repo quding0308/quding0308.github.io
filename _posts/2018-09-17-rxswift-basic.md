@@ -54,7 +54,6 @@ Observable 用于表示一个可被观察的序列（，序列中是一个个Eve
 - 一定在 MainScheduler 监听（主线程监听）
 - 共享状态变化
 
-
 ### Observer
 
 用来监听Event，然后对Event做出响应
@@ -185,5 +184,78 @@ ReplaySubject 将对观察者发送全部的元素，无论观察者是何时进
 - 一定在 MainScheduler 订阅（主线程订阅）
 - 一定在 MainScheduler 监听（主线程监听）
 - 共享状态变化
+
+
+### Disposable
+
+每一次绑定 都会生成一个 Disposable 对象。我们需要把 Disposable 对象放到一个 DisposeBag 中。
+
+#### 推荐使用 DisposeBag
+当 DisposeBag 对象被销毁调用  deinit 时，会遍历调用每个 Disposable 对象的 dispose 方法。RxSwift中使用的 Disposable 对象为 AnonymousDisposable
+
+    // 用于清除资源
+    public protocol Disposable {
+        /// Dispose resource.
+        func dispose()
+    }
+
+    // 每次调用这个方法 把 Disposable 对象加入到 bag中
+    extension Disposable {
+        public func disposed(by bag: DisposeBag) {
+            bag.insert(self)
+        }
+    }
+
+#### 手动管理 Disposable 对象
+
+
+    let disposable = viewModel.image?
+        .bind(to: imgView.rx.image)
+
+    // 自己来手动 dispose 后，订阅会被取消，内部资源会被释放
+    disposable.dispose()
+    
+#### takeUntil 管理订阅周期
+
+    /// takeUntil 操作符将镜像源 Observable，它同时观测第二个 Observable。一旦第二个 Observable 发出一个元素或者产生一个终止事件，那个镜像的 Observable 将立即终止。
+    viewModel.image?
+        .takeUntil(viewModel.sections)
+        .bind(to: imgView.rx.image)
+
+### Scheduler
+
+#### 使用 subscribeOn
+
+决定数据序列的构建函数在哪个 Scheduler 上运行
+
+#### 使用 observeOn
+
+决定在哪个 Scheduler 监听这个数据序列
+
+    tableView.rx.itemSelected
+        .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+        .subscribe(onNext: { indexPath in
+            print("select 后执行")
+        })
+        .disposed(by: disposeBag)
+    
+    tableView.rx.willDisplayCell
+        .subscribeOn(ConcurrentDispatchQueueScheduler.init(qos: .userInitiated))
+        .observeOn(MainScheduler.instance)
+        .subscribe(onNext: { (cell, indexPath) in
+            //
+        }).disposed(by: disposeBag)
+
+#### MainScheduler
+#### ConcurrentMainScheduler
+#### CurrentThreadScheduler
+
+#### SerialDispatchQueueScheduler
+#### ConcurrentDispatchQueueScheduler
+
+#### OperationQueueScheduler
+#### HistoricalScheduler
+
+### Operation
 
 
