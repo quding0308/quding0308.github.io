@@ -4,6 +4,10 @@ title:  "App启动时间优化"
 # date:   2018-07-09 10:000:00 +0800
 categories: blog
 ---
+
+* 目录
+{:toc}
+
 ## (数据基于iPhone6s)
 ## 启动时间统计
 启动时间 =  main之前 +  main之后

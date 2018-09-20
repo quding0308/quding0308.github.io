@@ -4,8 +4,10 @@ title:  "RxSwift与RxCocoa基础概念"
 categories: blog RxSwift
 ---
 
-### 基础概念
-#### Event
+* 目录
+{:toc}
+
+### Event
     public enum Event<Element> {
         case next(Element)  // 序列产生一个新的元素
         case error(Swift.Error) // 创建序列时报错，seq会终止
@@ -113,6 +115,7 @@ ObserverType定义了最基本的操作
 - 不会处理 error 和 complete 事件
 - 确保绑定都是在给定 Scheduler 上执行（默认 MainScheduler）
 
+示例：
 
     let observer: Binder<Bool> = Binder(view, binding: { (v, isHidden) in
         v.isHidden = isHidden
@@ -134,7 +137,6 @@ ObserverType定义了最基本的操作
             }
         }
     }
-
 
 
 ### Observable & Observer 既是可被监听的序列也是观察者
@@ -167,6 +169,7 @@ ReplaySubject 将对观察者发送全部的元素，无论观察者是何时进
 - 不会处理error，当deinit时会调用 completed event
 - 已废弃，不建议使用了
 
+示例：
 
     let model: Variable<KDLogViewSectionModel?> = Variable(nil)
 
@@ -182,4 +185,5 @@ ReplaySubject 将对观察者发送全部的元素，无论观察者是何时进
 - 一定在 MainScheduler 订阅（主线程订阅）
 - 一定在 MainScheduler 监听（主线程监听）
 - 共享状态变化
+
 
