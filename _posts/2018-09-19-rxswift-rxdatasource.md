@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "RxSwift-RxDataSources实现原理"
-categories: blog, RxSwift
+categories: blog RxSwift
 ---
 
 * 目录

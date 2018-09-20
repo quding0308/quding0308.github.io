@@ -4,20 +4,9 @@ title:  "Cache-Control使用总结"
 date:   2018-06-22 10:05:05 +0800
 categories: blog http
 ---
-目录
-<!-- TOC -->
 
-- [Request中设置Cache-Control](#request%E4%B8%AD%08%E8%AE%BE%E7%BD%AEcache-control)
-- [Response中设置Cache-control](#response%E4%B8%AD%E8%AE%BE%E7%BD%AEcache-control)
-- [iOS中Request设置cachePolicy](#ios%E4%B8%ADreques%08t%E8%AE%BE%E7%BD%AEcachepolicy)
-- [WKWebvView与NSURLRequestCachePolicy配合使用](#wkwebvview%E4%B8%8Ensurlrequestcachepolicy%08%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8)
-    - [第一种情况](#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%83%85%E5%86%B5)
-    - [第二种情况](#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%83%85%E5%86%B5)
-    - [第三中情况](#%E7%AC%AC%E4%B8%89%E4%B8%AD%E6%83%85%E5%86%B5)
-- [ETag的使用](#etag%E7%9A%84%E4%BD%BF%E7%94%A8)
-- [Last-Modified 和 If-Modified-Since](#last-modified-%E5%92%8C-if-modified-since)
-
-<!-- /TOC -->
+* 目录
+{:toc}
 
 ### Request中设置Cache-Control
 - no-cache

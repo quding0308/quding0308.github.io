@@ -5,6 +5,9 @@ date:   2018-06-10 10:05:05 +0800
 categories: blog
 ---
 
+* 目录
+{:toc}
+
 #### 常用缩写 
     A
     average ——> avg
