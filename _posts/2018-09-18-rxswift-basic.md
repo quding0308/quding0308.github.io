@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "RxSwift与RxCocoa基础"
+title:  "RxSwift与RxCocoa基础概念"
 categories: blog RxSwift
 ---
 
@@ -113,6 +113,7 @@ ObserverType定义了最基本的操作
 - 不会处理 error 和 complete 事件
 - 确保绑定都是在给定 Scheduler 上执行（默认 MainScheduler）
 
+
     let observer: Binder<Bool> = Binder(view, binding: { (v, isHidden) in
         v.isHidden = isHidden
     })
@@ -165,6 +166,7 @@ ReplaySubject 将对观察者发送全部的元素，无论观察者是何时进
 - 会对新订阅的observer发送当前值
 - 不会处理error，当deinit时会调用 completed event
 - 已废弃，不建议使用了
+
 
     let model: Variable<KDLogViewSectionModel?> = Variable(nil)
 
