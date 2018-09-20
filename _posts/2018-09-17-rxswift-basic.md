@@ -17,8 +17,7 @@ categories: blog RxSwift
 ### Observable
 Observable 用于表示一个可被观察的序列（，序列中是一个个Event
 
-#### 常用Observable
-#####  Single
+####  Single
 
 - 只能发出一个元素，或一个error事件
 - 不会共享状态变化
@@ -28,24 +27,24 @@ Observable 用于表示一个可被观察的序列（，序列中是一个个Eve
         case error(Swift.Error)
     }
 
-##### Maybe
+#### Maybe
 
 - 发出一个元素或者一个 completed 事件或者一个 error 事件
 - 不会共享状态变化
 
-##### Completable
+#### Completable
 
 - 不会发出元素，发出一个 completed 事件或者一个 error 事件
 - 不会共享状态变化
 
-##### Driver
+#### Driver
 
 为了简化UI层代码，具有以下特征：
 - 不会产生 error 事件
 - 一定在 MainScheduler 监听（主线程监听）
 - 共享状态变化
 
-##### ControlEvent
+#### ControlEvent
 
 专门用于描述UI控件所产生的事件，具有以下特征：
 
@@ -186,7 +185,7 @@ ReplaySubject 将对观察者发送全部的元素，无论观察者是何时进
 - 共享状态变化
 
 
-### Disposable
+### Disposable-管理订阅的生命周期
 
 每一次绑定 都会生成一个 Disposable 对象。我们需要把 Disposable 对象放到一个 DisposeBag 中。
 
