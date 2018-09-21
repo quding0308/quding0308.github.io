@@ -52,6 +52,16 @@ categories: blog RxSwift
 - 一定在 MainScheduler 监听（主线程监听）
 - 共享状态变化
 
+#### Hot and Cold Observable
+[官方介绍](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/HotAndColdObservables.md)
+
+> When does an Observable begin emitting its sequence of items? It depends on the Observable. A “hot” Observable may begin emitting items as soon as it is created, and so any observer who later subscribes to that Observable may start observing the sequence somewhere in the middle. A “cold” Observable, on the other hand, waits until an observer subscribes to it before it begins to emit items, and so such an observer is guaranteed to see the whole sequence from the beginning.
+
+
+Variable、ControlEvent、Driver等都是 Hot Observable 。不管有没有订阅者，都会发出 element 。Observable 中一般会有多个 element 。会共享状态变化。
+
+Async Operation、Http Connection等是 Cold Observable 。有了订阅者后才会发出 element 。Observable 一般只有一个 element。不会共享状态变化。
+
 ### Observer
 
 用来监听Event，然后对Event做出响应
@@ -254,6 +264,6 @@ ReplaySubject 将对观察者发送全部的元素，无论观察者是何时进
 #### OperationQueueScheduler
 #### HistoricalScheduler
 
-### Operation
+
 
 
