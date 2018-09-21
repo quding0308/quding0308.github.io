@@ -14,8 +14,7 @@ categories: blog RxSwift
         case completed  // 序列结束
     }
 
-### Observable
-Observable 用于表示一个可被观察的序列（，序列中是一个个Event
+### Observable-一个可被观察的序列
 
 ####  Single
 
