@@ -135,3 +135,21 @@ MyObject+Rx.swift
             }
         }
     }
+
+### DelegateProxy
+
+### DelegateProxyType
+
+
+### RxScrollViewDelegateProxy的使用
+
+
+#### RxScrollViewDelegateProxy
+
+#### RxScrollViewDelegateProxy
+
+
+#### RxCollectionViewDelegateProxy
+
+
+#### RxTextViewDelegateProxy
