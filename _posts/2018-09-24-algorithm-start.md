@@ -9,6 +9,7 @@ categories: blog algorithm
 {:toc}
 
 ### 课程
+推荐大家都去学习：
 
 [数据结构与算法之美](https://time.geekbang.org/column/intro/126)
 
@@ -33,8 +34,7 @@ categories: blog algorithm
 
 复杂度分析 是学习数据结构和算法的核心，是内功心法。
 
-
-### 重要知识
+### 必要知识
 
 #### 10个数据结构
 
