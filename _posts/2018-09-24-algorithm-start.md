@@ -118,16 +118,39 @@ categories: blog algorithm
 - 假如 f(x) 是几项之和，那么只保留增长最快（通常是阶最高）的项，其他项省略
 - 假如 f(x) 是几项之积，那么常数（不取决于x的乘数）省略
 
-例如 f(x) = 6*x^4 + 3*x^3 + 5 
+举例1
 
-根据规则1，忽略后两项，保留增长最快的项：6*x^4
-根据规则2，忽略系数6，最后的大O表示为：
+    例如 f(x) = 6*x^4 + 3*x^3 + 5 
 
-f(x） = O(x^4)
+    根据规则1，忽略后两项，保留增长最快的项：6*x^4
+    根据规则2，忽略系数6，最后的大O表示为：
 
-读作：该算法具有 x^4 阶的时间复杂度
+    f(x） = O(x^4)
 
+    读作：该算法具有 x^4 阶的时间复杂度
 
+举例2
+    
+    冒泡排序
+
+    void bubble_sort(int arr[], int len) {	
+        int i, j;	
+        for (i = 0; i < len - 1; i++) {
+            for (j = 0; j < len - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr[j], arr[j + 1]);
+                }
+            }
+        }
+    }
+
+    f(n) = n * (n) 
+
+https://www.jianshu.com/p/21428f9f4160
+
+https://www.google.com/search?newwindow=1&safe=strict&ei=Ok-qW530MYv38QWI97zAAg&q=%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F+%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%AE%A1%E7%AE%97&oq=%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F+%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%AE%A1%E7%AE%97&gs_l=psy-ab.3...445249.448257.0.448525.13.11.0.0.0.0.283.1195.2-5.5.0....0...1c.1j4.64.psy-ab..8.4.956...0j0i12k1j0i30k1.0.ulmd_sXzoyo
+
+https://zh.wikipedia.org/wiki/%E5%A4%A7O%E7%AC%A6%E5%8F%B7
 
 #### 使用场景
 
