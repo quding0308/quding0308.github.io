@@ -1,3 +1,3 @@
 
 #!/bin/sh
-jekyll server --drafts
+bundle exec jekyll server --drafts
