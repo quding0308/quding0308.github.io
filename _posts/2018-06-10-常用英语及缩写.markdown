@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "常用英文及缩写"
-date:   2018-06-10 10:05:05 +0800
 categories: blog
 ---
 

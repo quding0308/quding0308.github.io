@@ -67,12 +67,3 @@ categories: blog algorithm
 ![图片](http://pc5ouzvhg.bkt.clouddn.com/algorithm-1.jpeg)
 
 
-### 学习速记：
-
-#### 使用场景
-
-- 排序
-- 查询
-- 图操作
-
-
