@@ -1,7 +1,6 @@
 ---
 layout: post
-title:  "algorithm-开端【跟随极客时间的算法课程学习】"
-# date:   2018-06-23 10:05:05 +0800
+title:  "algorithm-1开端"
 categories: blog algorithm
 ---
 
@@ -9,7 +8,7 @@ categories: blog algorithm
 {:toc}
 
 ### 课程
-推荐大家都去学习：
+跟随课程去学习：
 
 [数据结构与算法之美](https://time.geekbang.org/column/intro/126)
 
