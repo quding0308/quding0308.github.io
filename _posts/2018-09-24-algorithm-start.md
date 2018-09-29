@@ -46,7 +46,7 @@ categories: blog algorithm
 - 堆
 - 跳表
 - 图
-- Trie树(refix Tree)
+- Trie树(Prefix Tree)
 
 #### 10个算法
 
