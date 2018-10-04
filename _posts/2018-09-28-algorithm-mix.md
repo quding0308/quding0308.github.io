@@ -188,4 +188,156 @@ categories: blog algorithm
 
 
 
+### 约瑟夫问题
 
+问题描述：
+
+N个人围成一圈，从第一个开始报数，第M个将被杀掉，最后剩下一个，其余人都将被杀掉。
+
+例如N=6，M=5，被杀掉的顺序是：5，4，6，2，3，1。
+
+#### 解法
+
+用循环单链模拟整个过程，时间复杂度为O(m*n)
+
+    class Node {
+        var next: Node?
+        var index: Int
+        
+        init(index: Int) {
+            self.index = index
+            print(index)
+        }
+    }
+
+    func createCycle(n: Int) -> Node? {
+        let head = Node(index: 1)
+        
+        var node = head
+        var count = 1
+        while count < n {
+            count += 1
+            
+            let next = Node(index: count)
+            
+            node.next = next
+            node = next
+        }
+        node.next = head // 单链环
+        
+        return head
+    }
+
+    func run(total: Int, tag: Int) {
+        let head = createCycle(n: total)
+        
+        let start = 1
+        var index = start
+        var node: Node? = head
+        var pre: Node?
+        while node !== node?.next {
+            if index == tag {
+                print("index \(node?.index ?? -1)")
+                pre?.next = node?.next
+                node = pre?.next
+                
+                index = start
+            } else {
+                pre = node
+                node = node?.next
+                index += 1
+            }
+        }
+        print("last one \(node?.index ?? -1)")
+    }
+
+
+    run(total: 6, tag: 5)
+    tag = 1 时 死循环了
+
+[参考](https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%91%9F%E5%A4%AB%E6%96%AF%E9%97%AE%E9%A2%98#C++%E7%89%88%E6%9C%AC)
+
+
+### 斐波那契数列
+
+又称为 黄金分割数列 或 兔子数列
+
+黄金分割
+随着数列项数的增加，前一项与后一项之比越来越逼近黄金分割的数值0.6180339887..
+
+指的是这样一个数列： 
+    
+    0、1、1、2、3、5、8、13、21、34、...
+
+数学表示：
+
+    f(1) = 1
+    f(2) = 1
+    f(n) = f(n -1) + f(n - 2)
+
+
+程序表示：
+
+    /// 递归表示 斐波那契数列
+    /// 时间复杂度为 O(2^n)
+    ///
+    /// - Parameter n: 数列中第n位的值
+    /// - Returns:
+    func fibonacci_recursion(n: UInt) -> UInt {
+        if n == 0 {
+            return 0
+        } else if n == 1 {
+            return 1
+        }
+        
+        return fibonacci_recursion(n: n - 1) + fibonacci_recursion(n: n - 2)
+    }
+
+    复杂度计算：f(4)的表示
+
+                    f(4)
+                    /   \ 
+                 f(3)    f(2) 
+               /    \    /   \ 
+            f(2)   f(1) f(1) f(0) 
+            /   \        
+           f(1) f(0) 
+
+    一个k层满二叉树的节点数为 2^k - 1
+    f(n)是一个树高为n的二叉树 近似计算复杂度为 O(2^n)
+
+
+    /// 迭代计算 斐波切纳数列
+    /// 时间复杂度为 O(n) 空间复杂度为 O(1)
+    /// - Parameter n:
+    /// - Returns:
+    func fibonacci_iterator(n: UInt) -> UInt {
+        if n == 0 {
+            return 0
+        } else if n == 1 {
+            return 1
+        } else {
+            var a: UInt = 1
+            var b: UInt = 1
+            var c: UInt = 1
+            
+            for _ in 2..<n {
+                c = a + b
+                a = b
+                b = c
+            }
+            
+            return c
+        }
+    }
+
+    /// 还有一种使用矩阵计算的思路，复杂度为O(log(n)
+
+
+### 求最大公约数
+
+    int gcd(int a,int b) {
+        if(a%b)
+            return gcd(b,a%b);
+        return b;
+    }
