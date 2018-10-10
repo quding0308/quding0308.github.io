@@ -40,18 +40,23 @@ allowing you to specify the version of libraries.
 
 #### 使用统一的CocoaPods版本号
 
-在项目中通过使用Gemfile 我们可以指定CocoaPods或fastlane的版本号，保证团队在某个项目中都使用统一的版本。举例
+在项目中通过使用Gemfile 我们可以指定CocoaPods或fastlane的版本号，保证团队在某个项目中都使用统一的版本。
 
-Gemfile
+新建Gemfile
+
     source 'https://rubygems.org'
     gem 'cocoapods', '~> 1.5.3'
 
-执行完 bundle install 后，会生成Gemfile.lock文件。团队内其他成员使用时，也需要执行一次 bundle install。
+执行完 bundle install 后，会生成Gemfile.lock文件。
+
+团队内其他成员使用时，也需要执行一次 bundle install。
 
 通过exec命令，使用Gemfile中定义的CocoaPods版本
 
     bundle exec pod update 
     bundle exec pod install
+
+    如果直接执行 pod install 会使用机器上安装的最新版本
 
 #### 使用官方master分支的CocoaPods
 
