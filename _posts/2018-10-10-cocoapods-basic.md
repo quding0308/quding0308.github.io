@@ -1,8 +1,7 @@
 ---
 layout: post
 title:  "CocoaPods基础知识"
-# date:   2018-06-23 10:05:05 +0800
-categories: blog algorithm
+categories: blog CocoaPods
 ---
 
 
@@ -75,7 +74,7 @@ Gemfile
     gem 'shenzhen'
     gem 'sbconstants'
     gem 'fastlane'
-    
+
 ### CocoaPods
 
 由Ruby语言开发，整个思路也跟Bundle类似。Podfile对应Gemfile，Podfile.lock 对应 Gemfile.lock
@@ -99,6 +98,7 @@ Cocoapods项目具体由下面几个gem组成：
 官方文档：
 
 [https://guides.cocoapods.org/contributing/dev-environment.html](https://guides.cocoapods.org/contributing/dev-environment.html)
+
 
 
 
