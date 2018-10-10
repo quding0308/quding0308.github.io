@@ -5,6 +5,10 @@ title:  "CocoaPods基础知识"
 categories: blog algorithm
 ---
 
+
+* 目录
+{:toc}
+
 ### RubyGems  
 
 Ruby dependency management
@@ -71,16 +75,12 @@ Gemfile
     gem 'shenzhen'
     gem 'sbconstants'
     gem 'fastlane'
-
-#### 自己修改CocoaPods源码
-    # 可以自己修改，从git拉自己的代码
-    gem 'cocoapods', :git => 'http://172.20.10.91/quding/CocoaPods.git'
-
+    
 ### CocoaPods
 
 由Ruby语言开发，整个思路也跟Bundle类似。Podfile对应Gemfile，Podfile.lock 对应 Gemfile.lock
 
-Cocoapods项目具体由下面几部分组成：
+Cocoapods项目具体由下面几个gem组成：
 - CocoaPods
 - Cocoapods-Core
 - Xcodeproj 
@@ -94,7 +94,7 @@ Cocoapods项目具体由下面几部分组成：
 
 其中，Xcodeproj 命令 可以用来修改Xcode项目的基本配置，包括 xcworkspace 和 xcccofign文件
 
-### 自己修改CocoaPods源码
+### 如何为CocoaPods贡献代码，以及自定义源码？
 
 官方文档：
 
