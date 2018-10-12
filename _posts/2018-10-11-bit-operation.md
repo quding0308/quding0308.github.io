@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "位运算以及在算法中的使用"
+title:  "位运算及一些使用技巧"
 categories: blog CocoaPods
 ---
 
