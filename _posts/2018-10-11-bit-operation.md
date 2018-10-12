@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "位运算及一些使用技巧"
+title:  "位运算及使用"
 categories: blog CocoaPods
 ---
 
@@ -127,11 +127,28 @@ categories: blog CocoaPods
 
 使用一个正整数二进制表示的第i位是1还是0，代表集合的第i个数取或者不取。 所以从0到2^n-1总共2^n个整数，正好对应集合的2^n个子集。
 
+    // 一共  2^n种情况
+    let arr: [Int] = [1, 2, 3]
+    let count = arr.count
+    let num = 0x1 << count
 
+    for index in 0..<num {
+        var value = index
+        var result = [Int]()
+        var idx = count - 1
+        
+        while value != 0 {
+            if value & 0x1 == 1 {
+                result.append(arr[idx])
+            }
+            value = value >> 1
+            idx -= 1
+        }
+        
+        print("index:\(index), arr:\(result)")
+    }
 
-
-
-[来源](https://www.zhihu.com/question/38206659)
+[参考](https://www.zhihu.com/question/38206659)
 
 #### 数组中，只有一个数出现一次，剩下都出现两次，找出出现一次的那个数
 
@@ -139,4 +156,48 @@ categories: blog CocoaPods
 
 数组中所有的数做异或操作，结果就是 只出现了一次的那个数
 
+    let arr: [Int] = [9, 2, 2, 4, 4]
+    var result = 0
+
+    for value in arr {
+        result = result ^ value
+    }
+    print("只出现了一次的数: \(result)")
+
 #### 数组中，有两个数出现一次，剩下都出现两次，找出出现一次的那个数
+
+思路：数组元素做完异或操作后，结果就是 result = a ^ b，其中 a b 是只出现了一次的数。result中找到bit位为1的值，凡是这一位为1的放到一个数组，其他放到另一个数组，就转化成了上面的问题，两个数组中，分别有一个数出现了一次。
+
+    func printNum(_ arr: [Int]) {
+        var result = 0
+        
+        for value in arr {
+            result = result ^ value
+        }
+        print("只出现了一次的数: \(result)")
+    }
+
+    // 找出两个只出现了一次的数
+    let arr: [Int] = [9, 2, 2, 4, 4, 5, 5, 8, 66, 66, 100, 100, 99, 99, 33, 33]
+    var result = 0
+    for value in arr {
+        result = result ^ value
+    }
+
+    let t1 = result & (result - 1) // result去掉最后的1后的数
+    let t2 = t1 ^ result  // 获取result最后的1
+
+    var arr1 = [Int]()
+    var arr2 = [Int]()
+    for value in arr {
+        result = result ^ value
+        if value & t2 != 0{
+            arr1.append(value)
+        } else {
+            arr2.append(value)
+        }
+    }
+
+    // 两个数组中分别有一个出现了一次的数，单独处理
+    printNum(arr1)
+    printNum(arr2)
