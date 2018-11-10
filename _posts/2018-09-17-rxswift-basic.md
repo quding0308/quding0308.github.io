@@ -43,6 +43,18 @@ categories: blog RxSwift
 - 一定在 MainScheduler 监听（主线程监听）
 - 共享状态变化
 
+``` Swift
+.asDriver(onErrorJustReturn: [])
+等价于
+let safeSequence = xs
+  .observeOn(MainScheduler.instance)       // 主线程监听
+  .catchErrorJustReturn(onErrorJustReturn) // 无法产生错误
+  .share(replay: 1, scope: .whileConnected)// 共享状态变化
+return Driver(raw: safeSequence)           // 封装
+```
+
+参考：https://beeth0ven.github.io/RxSwift-Chinese-Documentation/content/rxswift_core/observable/driver.html
+
 #### ControlEvent
 
 专门用于描述UI控件所产生的事件，具有以下特征：
