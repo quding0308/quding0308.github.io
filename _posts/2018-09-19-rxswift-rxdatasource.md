@@ -146,6 +146,3 @@ TableViewSectionedDataSource封装了几个closure用于初始化tableview
 	        [self _methodInvoked:anInvocation.selector withArguments:arguments];
 	    }
 	}
-
-
-
