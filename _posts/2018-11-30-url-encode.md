@@ -92,7 +92,45 @@ param参数 使用 encodeURIComponent()编码 之后自己拼接URL
 
 ### 4.iOS端URL编码处理
 
-待完成
+
+1.用于对URL的组成部分进行个别编码。（会对URL中保留字符也做编码，所以不能对整个URL做编码）
+iOS9已废弃 CFURLCreateStringByAddingPercentEscapes
+
+``` Swift
+- (NSString *)kd_URLEncodeStr:(nonnull NSString *)urlStr usingEncoding:(NSStringEncoding)encoding {
+    return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,(__bridge CFStringRef)urlStr,NULL,(CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",CFStringConvertNSStringEncodingToEncoding(encoding));
+}
+```
+
+2.使用新的api，用于对query参数做编码
+
+```
+NSString *param = @"1你好啊";
+// 只对query的参数做编码
+NSCharacterSet *set = [NSCharacterSet URLQueryAllowedCharacterSet];
+NSString *paramEncoded = [param stringByAddingPercentEncodingWithAllowedCharacters:set];
+```
+
+3.webview加载 可是使用WebKit来处理URL编码
+
+```
+参考：https://stackoverflow.com/questions/12652396/ios-how-to-do-proper-url-encoding
+
+UIWebView *webView = [[[UIWebView alloc]
+                       initWithFrame:self.view.frame]
+                      autorelease];
+NSString *url = @"http://www.httpdump.com/texis/browserinfo/Témp.html";
+[webView loadHTMLString:[NSString stringWithFormat:
+                         @"<script>window.location=%@;</script>",
+                         [[[NSString alloc]
+                           initWithData:[NSJSONSerialization
+                                         dataWithJSONObject:url
+                                         options:NSJSONReadingAllowFragments
+                                         error:NULL]
+                           encoding:NSUTF8StringEncoding]
+                          autorelease]]
+                baseURL:nil];
+```
 
 ### 参考
 
