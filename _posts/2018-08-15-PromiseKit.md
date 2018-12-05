@@ -13,8 +13,7 @@ categories: blog ios
 
 [官方网站](https://github.com/mxcl/PromiseKit)
 
-### 如何使用
-#### 定义一个Promise
+### 基本使用
 
 ``` Swift
 
@@ -48,7 +47,12 @@ struct User: Codable {
 }
 ```
 
-#### firstly
+### Operation
+
+#### firstly & done & catch
+
+基本必须出现的三个操作
+
 ``` Swift
 firstly {   // 执行 promise
     Promise.value("1")
@@ -66,6 +70,7 @@ after(seconds: 3).done {
     print("do sth")
 }
 ```
+
 
 #### when
 
@@ -114,7 +119,7 @@ firstly {
 }
 ```
 
-### finally 
+#### finally 
 最终执行的代码。相当于 ensure在最后执行。返回 Void
 
 ``` Swift 
@@ -202,6 +207,13 @@ firstly {
 - 使用 done 表示所有工作都已做完了
 - 使用 map 表示需要对返回值转换
 
+### 修改default queue
+
+``` Swift
+    PromiseKit.conf.Q.map = .global()
+    PromiseKit.conf.Q.return = .main  //NOTE this is the default
+```
+
 ### 源码分析
 
 #### Result
@@ -232,7 +244,7 @@ Promise的生命周期状态
     pending -> rejected
 
 
-### Thenable
+#### Thenable
 
     /// Thenable represents an asynchronous operation that can be chained.
     public protocol Thenable: class {
@@ -251,12 +263,6 @@ Promise的生命周期状态
 
 封装了异步操作，没有error的可能
 
-### 注意问题
-
-#### 修改default queue
-
-    PromiseKit.conf.Q.map = .global()
-    PromiseKit.conf.Q.return = .main  //NOTE this is the default
 
 ### 参考
 
