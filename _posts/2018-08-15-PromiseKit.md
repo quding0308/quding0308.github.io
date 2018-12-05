@@ -9,6 +9,8 @@ categories: blog ios
 
 ### 库的作用
 
+让异步逻辑清晰一些，避免回调地狱。
+
 [官方网站](https://github.com/mxcl/PromiseKit)
 
 ### 如何使用
