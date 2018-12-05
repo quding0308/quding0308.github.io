@@ -135,7 +135,7 @@ firstly {
 ```
 
 #### map
-与 Swit 中的map 含义一致
+与 Swift 中的map 含义一致
 ``` Swift
 firstly {
     login()
