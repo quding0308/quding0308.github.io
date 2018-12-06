@@ -43,3 +43,4 @@ struct Record {
 ### 参考
 - https://zhuanlan.zhihu.com/p/35256233
 - https://xiangwangfeng.com/2017/03/16/IGListKit-diff-实现简析
+- 求最长公共子序列：https://book.quding0308.com/algorithm/other/lcsubsequence.html
