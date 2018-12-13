@@ -14,9 +14,3 @@ Github
 <https://github.com/quding0308>
 
 
-***
-#### hey man
-
-Protect your family, your wife, your son and your parents
-
-Open your heart, receive info and evolve yourself
