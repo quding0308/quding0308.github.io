@@ -31,7 +31,7 @@ UINavigationBar
 
 ![](https://raw.githubusercontent.com/quding0308/quding0308.github.io/master/res/ios_12_titleview.png)
 
-### iOS11 之前的view 层级
+### iOS11 之前的 view 层级
 ```
 UINavigationBar
     - UIBarBackground
