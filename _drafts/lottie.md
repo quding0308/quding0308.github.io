@@ -1,0 +1,26 @@
+---
+layout: post
+title:  "lottie 库源码分析"
+categories: blog
+---
+
+* 目录
+{:toc}
+
+### 源码
+
+
+
+具体使用场景：
+    LOTAnimationView
+    LOTAnimationTransitionController
+    LOTAnimatedSwitch
+    LOTAnimatedControl
+
+LOTAnimationCache 负责缓存
+
+LOTKeypath
+
+LOTLayerContainer: CALayer
+
+LOTCompositionContainer: LOTLayerContainer
