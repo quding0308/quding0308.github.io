@@ -39,14 +39,11 @@ kramdown:
   toc_levels: 1..4
   # enable_coderay: false
 
-# permalink:        pretty
-
 # plugins:
   # - jekyll-feed
 
-
-kramdown:
-    toc_levels: 1..4
+paginate: 5
+# paginate_path: "page:num"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
