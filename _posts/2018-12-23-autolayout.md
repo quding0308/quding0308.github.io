@@ -9,35 +9,44 @@ categories: blog
 {:toc}
 
 
-## AutoLayout 系统 API
+## 系统 API
 
 ### 使用官方 API 设置约束
 ```
-let v2 = UIView()
 view.addSubview(v2)
-
 v2.translatesAutoresizingMaskIntoConstraints = false
-let constraint1 = NSLayoutConstraint(item: v2, attribute: .left,
-                                        relatedBy: .equal,
-                                        toItem: view, attribute: .left,
-                                        multiplier: 1, constant: 0)
+let c1 = NSLayoutConstraint(
+            item: v2, attribute: .left,
+            relatedBy: .equal,
+            toItem: view, attribute: .left,
+            multiplier: 1, constant: 0)
 
-let constraint2 = NSLayoutConstraint(item: v2, attribute: .width,
-                                        relatedBy: .equal,
-                                        toItem: nil, attribute: .notAnAttribute,
-                                        multiplier: 1, constant: 100)
+let c2 = NSLayoutConstraint(
+            item: v2, attribute: .width,
+            relatedBy: .equal,
+            toItem: nil, attribute: .notAnAttribute,
+            multiplier: 1, constant: 100)
 
-let constraint3 = NSLayoutConstraint(item: v2, attribute: .top,
-                                        relatedBy: .equal,
-                                        toItem: view, attribute: .top,
-                                        multiplier: 1, constant: 100)
+let c3 = NSLayoutConstraint(
+            item: v2, attribute: .top,
+            relatedBy: .equal,
+            toItem: view, attribute: .top,
+            multiplier: 1, constant: 100)
 
-let constraint4 = NSLayoutConstraint(item: v2, attribute: .height,
-                                        relatedBy: .equal,
-                                        toItem: nil, attribute: .notAnAttribute,
-                                        multiplier: 1, constant: 100)
+let c4 = NSLayoutConstraint(
+            item: v2, attribute: .height,
+            relatedBy: .equal,
+            toItem: nil, attribute: .notAnAttribute,
+            multiplier: 1, constant: 100)
 
-NSLayoutConstraint.activate([constraint1, constraint2, constraint3, constraint4])
+// 约束生效
+NSLayoutConstraint.activate([c1, c2, c3, c4])
+
+// 约束失效
+NSLayoutConstraint.deactivate([c1, c2]) // 效率更高
+// 等价于
+c1.isActive = false
+c2.isActive = false
 ```
 
 ### Content Hugging Priority
@@ -110,18 +119,90 @@ label1.text = "你发货发大水念佛fasdfasdfa发..."
 label2.text = "佛按时发偶发啊121212123456789"
 ```
 
-参考：https://stackoverflow.com/questions/15850417/cocoa-autolayout-content-hugging-vs-content-compression-resistance-priority
 
 ### firstBaseline 和 lastBaseline
 
-参考：https://stackoverflow.com/questions/33932846/first-baseline-and-last-baseline-properties-in-uistackview
-
 使用场景：多行文本的textView对齐的时候。使用 firstBaseline 第一行文本对齐，使用 lastBaseline 最后一行文本对齐。
+
+firstBaseline:
+
+![](https://raw.githubusercontent.com/quding0308/quding0308.github.io/master/res/firstbaseline.png)
+
+lastBaseLine:
+
+![](https://raw.githubusercontent.com/quding0308/quding0308.github.io/master/res/lastbaseline.png)
 
 ### Margin
 
+当 superView 的 margin 改变时，所有依赖 margin 的 subviews 的布局都会调整。
+
+margin 如果设置为负数，会默认为默认为0来处理。
+
+``` Swift
+view.layoutMargins = UIEdgeInsetsMake(0, 0, 20, 0)
+
+let label2 = UILabel()
+label2.backgroundColor = .red
+view.addSubview(label2)
+label1.text = "123"
+label2.snp.updateConstraints { make in
+    make.left.right.equalToSuperview()
+    make.height.equalTo(200)
+
+    make.bottomMargin.equalToSuperview()
+    // make.centerYWithinMargins.equalToSuperview()
+}
+
+after(seconds: 3).done {
+    UIView.animate(withDuration: 2, animations: {
+        self.view.layoutMargins = UIEdgeInsetsMake(0, 0, 120, 0)
+        self.view.layoutIfNeeded()
+    })
+}
+```
+
+### safeArea 和 topLayoutGuide 和 bottomLayoutGuide
+
+我们可以 通过 safeArea 来获取 navigation bar 和 tabbar 占用的高度，从而 设置 subview 的高度（iOS11以下使用topLayoutGuide、bottomLayoutGuide）
+
+safeArea：
+
+```
+self.edgesForExtendedLayout = UIRectEdge.all
+
+带刘海的屏幕 safeArea： 
+UIEdgeInsets(top: 88.0, left: 0.0, bottom: 34.0, right: 0.0)
+
+不带刘海的屏幕 safeArea：
+UIEdgeInsets(top: 64.0, left: 0.0, bottom: 0.0, right: 0.0)
+```
+
+在 VC 中 根据 safeArea 设置 view 大小：
+
+``` Swift
+override func viewDidLayoutSubviews() {
+    v1.snp.updateConstraints { make in
+        if #available(iOS 11.0, *) {
+            make.top.equalToSuperview().offset(self.view.safeAreaInsets.top)
+        } else {
+            // Fallback on earlier versions
+            make.top.equalToSuperview().offset(self.topLayoutGuide.length)
+        }
+    }
+
+    v2.snp.updateConstraints { make in
+        if #available(iOS 11.0, *) {
+            make.bottom.equalToSuperview().offset(-self.view.safeAreaInsets.bottom)
+        } else {
+            // Fallback on earlier versions
+            make.bottom.equalToSuperview().offset(-self.bottomLayoutGuide.length)
+        }
+    }
+}
+```
 
 ## 参考
 
-- https://www.jianshu.com/p/de2446b195ce
-- 
+- [https://www.jianshu.com/p/de2446b195ce](https://www.jianshu.com/p/de2446b195ce)
+- [https://stackoverflow.com/questions/33932846/first-baseline-and-last-baseline-properties-in-uistackview](https://stackoverflow.com/questions/33932846/first-baseline-and-last-baseline-properties-in-uistackview)
+- [https://stackoverflow.com/questions/15850417/cocoa-autolayout-content-hugging-vs-content-compression-resistance-priority](https://stackoverflow.com/questions/15850417/cocoa-autolayout-content-hugging-vs-content-compression-resistance-priority)
