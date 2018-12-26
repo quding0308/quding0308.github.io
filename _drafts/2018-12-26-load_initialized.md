@@ -14,10 +14,12 @@ categories: blog
 
 ### 调用时机：
 
+![](https://raw.githubusercontent.com/quding0308/quding0308.github.io/master/res/runtime2.png)
 
+图中是实际调用 +initialize 的方法。
 
 ### 源码
-runtime 通过 调用 _class_initialize 来 调用 +initialize，下面是源码：
+runtime 通过 调用 _class_initialize 来 调用 +initialize ，下面是源码：
 ```
 /***********************************************************************
 * class_initialize.  Send the '+initialize' message on demand to any
