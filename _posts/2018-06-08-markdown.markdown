@@ -33,6 +33,14 @@ categories: blog
 wiki地址：[https://zh.wikipedia.org/wiki/Markdown](https://zh.wikipedia.org/wiki/Markdown)   
 参考：<http://wowubuntu.com/markdown/#code>
 
+
+**加载 assets 目录中的资源**
+
+![](/assets/img/test.png)
+
+![](/assets/img/firstbaseline.png)
+
+
 ***
 
 ### VSCode中Markdown All in One插件的使用
