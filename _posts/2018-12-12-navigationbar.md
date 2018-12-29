@@ -25,11 +25,11 @@ UINavigationBar
 
 #### 设置了 title 
 
-![](https://raw.githubusercontent.com/quding0308/quding0308.github.io/master/res/ios_12_title.png)
+![](/assets/img/ios_12_title.png)
 
 #### 设置了 titleView
 
-![](https://raw.githubusercontent.com/quding0308/quding0308.github.io/master/res/ios_12_titleview.png)
+![](/assets/img/ios_12_titleview.png)
 
 ### iOS11 之前的 view 层级
 ```
@@ -47,11 +47,11 @@ UINavigationBar
 
 #### 设置了 title 
 
-![](https://raw.githubusercontent.com/quding0308/quding0308.github.io/master/res/ios10_3_titleview.png)
+![](/assets/img/ios10_3_titleview.png)
 
 #### 设置了 titleView
 
-![](https://raw.githubusercontent.com/quding0308/quding0308.github.io/master/res/ios10_3_title.png)
+![](/assets/img/ios10_3_title.png)
 
 ### 在 iOS11 之后 我们可以 通过重设 UIButtonBarStackView 与 UILabel 的约束，来重新调整item间距
 

@@ -99,7 +99,7 @@ void call_load_methods(void)
 
 ### 源码：
 
-![](https://raw.githubusercontent.com/quding0308/quding0308.github.io/master/res/runtime4.png)
+![](/assets/img/runtime4.png)
 
 当调用 objc_msgSend 时，会调用 lookUpImpOrForward 去查找方法。
 
