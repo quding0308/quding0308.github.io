@@ -105,7 +105,7 @@ deferred 操作符将等待观察者订阅它，才创建一个 Observable。每
         return Disposables.create()
     }
 
-### 通过组合创建Observable
+### 组合 Observable
 
 #### merge
 
@@ -180,28 +180,60 @@ Observable 之间没有依赖关系
 ### 转换Observable
 
 #### map
-
+```
     Observable.of(1, 2, 3)
         .map { $0 * 10 }
         .subscribe(onNext: { print($0) })
         .disposed(by: disposeBag)
-
+```
 #### flatMap
 
+flatMap 闭包会返回 Observable，然后所有 Observable 合称为一个 Observable 作为结果
+
+```
+Observable.repeatElement(3)
+            .flatMap({ value in
+                return Observable.just(value)
+            })
+            .subscribe(onNext: { value in
+                print(value)
+            })
+            .disposed(by: bag)
+```
 
 #### flatMapLatest
+
+参考：https://github.com/baconjs/bacon.js/wiki/Diagrams
+
+
 
 
 #### concatMap
 
+将源 Observable 的每一个元素应用一个转换方法，将他们转换成 Observables。然后让这些 Observables 按顺序的发出元素，当前一个 Observable 元素发送完毕后，后一个 Observable 才可以开始发出元素。等待前一个 Observable 产生完成事件后，才对后一个 Observable 进行订阅。
+
+```
+let o1 = Observable.of(1, 2, 3)
+let o2 = Observable.of("a", "b", "c")
+o1.concatMap({ v1 in
+        return o2.map({ (v2) in
+            return "\(v1)" + v2
+        })
+    })
+    .subscribe(onNext: { value in
+        print(value)
+    })
+    .disposed(by: bag)
+```
 
 #### scan
 对每个元素 遍历操作 应用一个函数。
 
 这个函数有一个初始值，之后会把每个元素 和 上次的结果作为参数传进去。
 
-该操作 跟 reduce、accumulator 有点类似，入参都一样。但 reduce 最后只返回一个累积的结果，scan 是对每个元素操作再返回一个元素苏亮相等的Observable
+该操作 跟 reduce、accumulator 有点类似，入参都一样。但 reduce 最后只返回一个累积的结果，scan 会返回一个 Observable
 
+```
     let observable2 = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
 
     observable2.scan(100) { (first, element) in
@@ -209,11 +241,11 @@ Observable 之间没有依赖关系
         }.subscribe(onNext: { value in
             print("111 \(value)")
         })
+```
 
 ### 从 Observable 中发出指定元素
 
 #### filter
-
 
 #### take
 
@@ -251,8 +283,48 @@ Observable 之间没有依赖关系
 
 #### distinctUntilChanged
 
+阻止 Observable 发出相同的元素。如果前后两个元素相同，则后面的元素不会发出来
 
-#### distinctUntilChanged
+```
+Observable.of("1", "1", "2", "3", "4", "4")
+    .distinctUntilChanged()
+    .subscribe {
+        print($0)
+    }
+    .disposed(by: bag)
+
+输出：1 2 3 4                                                
+```
+
+#### throttle
+
+限流  在一定时间内，只输出 第一条和最后一条，中间的忽略。
+
+适用于：输入框搜索限制发送请求。
+
+```
+let subject = PublishSubject<Int>()
+        subject.throttle(2, scheduler: MainScheduler.instance)
+        .subscribe {
+            print($0)
+        }
+        .disposed(by: bag)
+        
+        subject.onNext(1)
+        subject.onNext(2)
+        subject.onNext(3)
+        subject.onNext(4)
+        
+        after(seconds: 1).done {
+            subject.onNext(5)
+        }
+        
+        after(seconds: 3).done {
+            subject.onNext(6)
+        }
+        
+输出 1 5 6
+```
 
 #### delay
 

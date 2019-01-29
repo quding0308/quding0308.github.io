@@ -64,6 +64,14 @@ return Driver(raw: safeSequence)           // 封装
 - 一定在 MainScheduler 监听（主线程监听）
 - 共享状态变化
 
+#### Signal
+
+Observable 有以下特性：
+- 不会产生 error 
+- 在主线程处理 event
+- `share(scope: .whileConnected)` sharing strategy
+
+
 #### Hot and Cold Observable
 [官方介绍](https://github.com/ReactiveX/RxSwift/blob/master/Documentation/HotAndColdObservables.md)
 
@@ -180,21 +188,6 @@ ReplaySubject 将对观察者发送全部的元素，无论观察者是何时进
 #### BehaviorSubject
 
 当观察者对 BehaviorSubject 进行订阅时，它会将源 Observable 中最新的元素发送出来（如果不存在最新的元素，就发出默认元素）。然后将随后产生的元素发送出来。
-
-#### Variable
-    
-- Variable 封装了一个 BehaviorSubject，它会持有当前值
-- 会对新订阅的observer发送当前值
-- 不会处理error，当deinit时会调用 completed event
-- 已废弃，不建议使用了
-
-示例：
-
-    let model: Variable<KDLogViewSectionModel?> = Variable(nil)
-
-    func loadData() {
-        model.value = self.refetchSections()    // set value的时候 内部的BehaviorSubject实际会发送event
-    }
 
 #### ControlProperty
 
