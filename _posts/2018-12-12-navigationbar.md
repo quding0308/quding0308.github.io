@@ -1,11 +1,13 @@
 ---
 layout: post
-title:  "UINavigationBar UI层级"
+title:  "UINavigationBar 相关问题"
 categories: blog
 ---
 
 * 目录
 {:toc}
+
+## UINavigationBar UI层级
 
 ### iOS11之后的view层级
 ```
@@ -41,9 +43,7 @@ UINavigationBar
     - UILabel   // 对应 titleView 设置成了UILabel
     - UINavigationItemView    // 对应 title
         - UILabel
-
 ```
-
 
 #### 设置了 title 
 
@@ -68,4 +68,40 @@ if let views = view.superview?.subviews, views.count >= 3 {
         }
     }
 }
+```
+
+#### UIBarBackground的层级
+
+```
+UINavigationBar : UIView
+    - _UIBarBackground
+        - UIImageView
+        - UIVisualEffectView
+          - UIVisualEffectBackdropView
+          - UIVisualEffectSubView
+          - UIVisualEffectSubView
+    - _UINavigationBarContentView
+        - _UIButtonBarButton
+        - UILabel // title
+```
+
+##### 设置完全透明：
+
+代码：
+
+```
+[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];    
+self.navigationController.navigationBar.shadowImage = [UIImage new];
+self.navigationController.navigationBar.translucent = YES;
+```
+
+去掉了模糊效果，变透明后的层级：
+
+```
+UINavigationBar : UIView
+    - _UIBarBackground
+        - UIImageView
+    - _UINavigationBarContentView
+        - _UIButtonBarButton
+        - UILabel // title
 ```
