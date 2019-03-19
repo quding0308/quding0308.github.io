@@ -85,7 +85,7 @@ UINavigationBar : UIView
         - UILabel // title
 ```
 
-##### 设置完全透明：
+### 设置完全透明：
 
 代码：
 
@@ -104,4 +104,30 @@ UINavigationBar : UIView
     - _UINavigationBarContentView
         - _UIButtonBarButton
         - UILabel // title
+```
+
+### 设置背景色
+
+#### 方式1
+
+```
+[navigationBar setBarTintColor:[UIColor whiteColor]];
+
+// 此时背景色默认带半透明 0.85 
+UI层级：
+    - _UIBarBackground
+        - UIImageView
+        - UIVisualEffectView
+          - UIVisualEffectBackdropView
+          - UIVisualEffectSubView
+          - UIVisualEffectSubView // 设置的 tint color ，透明度 0.85
+```
+
+#### 方式2
+
+```
+[navigationBar setBarTintColor:[UIColor whiteColor]];
+[navigationBar setTranslucent:NO];
+UI层级：
+    - _UIBarBackground  // 背景色为 tintColor 没有半透明 (_UIBarBackground 没有 subview)
 ```
