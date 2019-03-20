@@ -133,6 +133,44 @@ setNeedsStatusBarAppearanceUpdate
 }
 ```
 
+### 设置维度
+
+App级别 -> VC级别
+
+#### App级别
+
+Info.plist 中设置 
+
+```
+<key>UIStatusBarHidden</key>
+<true/>
+<key>UIStatusBarStyle</key>
+<string>UIStatusBarStyleLightContent</string>
+```
+
+或者使用 UIApplication 的方法：
+
+```
+[[UIApplication sharedApplication] setStatusBarHidden:YES];
+[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];        
+```
+
+VC级别：
+
+```
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault; // 文字为黑色
+    // return UIStatusBarStyleLightContent;    // 文字为白色
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationFade;
+}
+```
 
 ### 参考
 
