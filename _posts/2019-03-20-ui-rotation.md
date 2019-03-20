@@ -41,7 +41,7 @@ Info.plist 设置 了App支持的方向。自动旋转的方向只会在这几�
 }
 ```
 
-## UIViewController级别设置
+## VC级别设置
 
 ```
 // VC
