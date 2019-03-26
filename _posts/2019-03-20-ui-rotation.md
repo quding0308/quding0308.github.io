@@ -31,7 +31,6 @@ Info.plist 设置 了App支持的方向。自动旋转的方向只会在这几�
 	</array>
 ```
 
-
 ## Window级别设置
 
 在AppDelegate中的回调方法中，可以为 某个Window设置
