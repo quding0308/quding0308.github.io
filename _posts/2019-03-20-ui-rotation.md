@@ -127,8 +127,6 @@ UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
 每次旋转之后，orientation 都会改变。我们可以直接设置 orientation 来强制旋转屏幕。
 
 ```
-
-```
 [[UIDevice currentDevice] setValue:@(UIInterfaceOrientationPortrait) forKey:@"orientation"];
 ```
 
