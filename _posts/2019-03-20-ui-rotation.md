@@ -69,7 +69,7 @@ Info.plist 设置 了App支持的方向。自动旋转的方向只会在这几�
 }
 ```
 
-### App支持自适应旋转屏幕 
+### App支持自适应旋转屏幕
 
 
 #### Info.plist 设置
@@ -115,6 +115,37 @@ App -> window -> VC
 
 - 默认情况下，会根据3个维度的设置 决定 VC的横竖屏。
 - 如果VC设置了屏幕方向，则以VC为准
+
+## 强制屏幕旋转
+
+自动旋转屏幕的callback 实际最后设置的是 
+
+```
+UIInterfaceOrientation orientation = [[UIDevice currentDevice] orientation];
+```
+
+每次旋转之后，orientation 都会改变。我们可以直接设置 orientation 来强制旋转屏幕。
+
+```
+
+```
+[[UIDevice currentDevice] setValue:@(UIInterfaceOrientationPortrait) forKey:@"orientation"];
+```
+
+// 等价于 
+```
+- (void)interfaceOrientation:(UIInterfaceOrientation)orientation {
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        SEL selector             = NSSelectorFromString(@"setOrientation:");
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        int val                  = orientation;
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+    }
+}
+```
 
 ## 注意：
 
