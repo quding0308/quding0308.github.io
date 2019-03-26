@@ -12,7 +12,7 @@ categories: blog
 注意点：
 
 - url 是 ipa的下载地址
-- bundle-identifier、title、icon 是app的一些必要数据
+- bundle-identifier、title、icon 是app的一些基础数据，是必须的
 - 该plist文件上传到服务器，必须是 https下载
 
 最后安装包的链接：
