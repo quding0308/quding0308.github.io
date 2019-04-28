@@ -19,9 +19,6 @@ Ruby dependency management
 
     gem uninstall xx
 
-
-
-
 ### Bundler
 
 Bundler creates a consistent application environment for your application, by 
@@ -37,6 +34,16 @@ allowing you to specify the version of libraries.
 
 
     bundle update 可以根据Gemfile重新生成Gemfile.lock文件
+
+### 安装 bundle 和 对应的 CocoaPods
+
+在执行 sh pod_install.sh 之前需要先执行两个命令
+```
+// 安装 bundler
+gem install bundler
+// 安装对应的 CocoaPods
+bundle install
+```
 
 #### 使用统一的CocoaPods版本号
 
