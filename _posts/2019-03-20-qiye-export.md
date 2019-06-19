@@ -7,6 +7,15 @@ categories: blog
 * 目录
 {:toc}
 
+## 下载地址
+
+1. 把 plist 文件上传到服务器(必须是https)
+2. 下载的地址，在 手机的 safari 中打开 （可以先把url生成二维码）
+```
+itms-services:///?action=download-manifest&url=https://xxx/test.plist
+```
+3. 在safari中打开链接即可下载
+
 ## plist文件
 
 注意点：
@@ -15,13 +24,6 @@ categories: blog
 - bundle-identifier、title、icon 是app的一些基础数据，是必须的
 - 该plist文件上传到服务器，必须是 https下载
 
-最后安装包的链接：
-
-```
-itms-services:///?action=download-manifest&url=https://xxx/test.plist
-```
-
-在safari中打开链接即可下载。
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
