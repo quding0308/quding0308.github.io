@@ -346,12 +346,13 @@ private func test() {
 该操作 跟 reduce、accumulator 有点类似，入参都一样。但 reduce 最后只返回一个累积的结果，scan 会返回一个 Observable
 
 ```
+// 输出：0 1 3 6 10 15 21 28 ..
 let observable2 = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
 
-observable2.scan(100) { (first, element) in
-        return first + element
+observable2.scan(0) { (first, element) in
+    return first + element
     }.subscribe(onNext: { value in
-        print("111 \(value)")
+        print("\(value)")
     })
 ```
 
