@@ -177,6 +177,42 @@ Observable 之间没有依赖关系
             print("1")
         })
 
+```
+let disposeBag = DisposeBag()
+private func test() {
+    let o1 = Observable<Int>.create({ observer in
+        after(seconds: Double(2)).done {
+            observer.onNext(999)
+            observer.onCompleted()
+        }
+        
+        return Disposables.create()
+    })
+    
+    let o2 = Observable<Int>.timer(0, period: 3, scheduler: MainScheduler.instance)
+
+    // 输出： 0、999、1、2、3 ...
+    Observable.merge(o1, o2)
+        .subscribe(onNext: { print($0) })
+        .disposed(by: disposeBag)
+    
+    // 输出： 999、0、1、2、3 ...
+    Observable.concat(o1, o2)
+        .subscribe(onNext: { print($0) })
+        .disposed(by: disposeBag)
+    
+    // 输出： (999，0)
+    Observable.zip(o1, o2)
+        .subscribe(onNext: { print($0) })
+        .disposed(by: disposeBag)
+
+    // 输出： (999，0)、(999，1)、(999，2) ...
+    Observable.combineLatest(o1, o2)
+        .subscribe(onNext: { print($0) })
+        .disposed(by: disposeBag)
+}
+```
+
 ### 转换Observable
 
 #### map
@@ -203,10 +239,9 @@ Observable.repeatElement(3)
 
 #### flatMapLatest
 
+![](/assets/img/ios_12_title.png)
+
 参考：https://github.com/baconjs/bacon.js/wiki/Diagrams
-
-
-
 
 #### concatMap
 
@@ -226,6 +261,83 @@ o1.concatMap({ v1 in
     .disposed(by: bag)
 ```
 
+
+
+```
+输出结果为：
+=== flatMap 1
+=== concatMap 2
+=== flatMapFirst 2
+=== flatMap 2
+=== concatMap 1
+=== flatMapLatest 5
+=== flatMap 5
+=== concatMap 5
+
+
+let disposeBag = DisposeBag()
+private func test() {
+    let o = Observable<Int>.create() { observer in
+        observer.onNext(2)
+        observer.onNext(1)
+        observer.onNext(5)
+        observer.onCompleted()
+        
+        return Disposables.create()
+    }
+    
+    o.flatMap({ element in
+        return Observable<String>.create({ observer in
+            after(seconds: Double(element)).done {
+                observer.onNext("\(element)")
+            }
+            
+            return Disposables.create()
+        })
+    }).subscribe(onNext: { element in
+        print("=== flatMap \(element)")
+    }).disposed(by: disposeBag)
+    
+    o.flatMapFirst({ element in
+        return Observable<String>.create({ observer in
+            after(seconds: Double(element)).done {
+                observer.onNext("\(element)")
+            }
+            
+            return Disposables.create()
+        })
+    }).subscribe(onNext: { element in
+        print("=== flatMapFirst \(element)")
+    }).disposed(by: disposeBag)
+    
+    o.flatMapLatest({ element in
+        return Observable<String>.create({ observer in
+            after(seconds: Double(element)).done {
+                observer.onNext("\(element)")
+            }
+            
+            return Disposables.create()
+        })
+    }).subscribe(onNext: { element in
+        print("=== flatMapLatest \(element)")
+    }).disposed(by: disposeBag)
+    
+    o.concatMap({ element in
+        return Observable<String>.create({ observer in
+            after(seconds: Double(element)).done {
+                observer.onNext("\(element)")
+                // concat 必须有 oncompleted，否则后续的 Observable 一直在等待
+                observer.onCompleted()
+            }
+            
+            return Disposables.create()
+        })
+    }).subscribe(onNext: { element in
+        print("=== concatMap \(element)")
+    }).disposed(by: disposeBag)
+}
+```
+
 #### scan
 对每个元素 遍历操作 应用一个函数。
 
@@ -234,66 +346,104 @@ o1.concatMap({ v1 in
 该操作 跟 reduce、accumulator 有点类似，入参都一样。但 reduce 最后只返回一个累积的结果，scan 会返回一个 Observable
 
 ```
-    let observable2 = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+let observable2 = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
 
-    observable2.scan(100) { (first, element) in
-            return first + element
-        }.subscribe(onNext: { value in
-            print("111 \(value)")
-        })
+observable2.scan(100) { (first, element) in
+        return first + element
+    }.subscribe(onNext: { value in
+        print("111 \(value)")
+    })
 ```
 
 ### 从 Observable 中发出指定元素
 
 #### filter
 
+过滤数据
+```
+let o2 = Observable<Int>.timer(0, period: 2, scheduler: MainScheduler.instance)
+o2.filter() { $0 % 2 == 0 }
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
+```
+
 #### take
 
-#### takeWhile
+仅仅从 Observable 中发出头 n 个元素
 
+```
+输出： 0 1 2
 
-#### akeWhileWithIndex
-
-#### takeUntil
+let o2 = Observable<Int>.timer(0, period: 2, scheduler: MainScheduler.instance)
+o2.take(3)
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
+```
 
 #### takeLast
 
+只发出尾部 n 个元素。并且忽略掉前面的元素。
+
+```
+输出：3 2 1
+
+Observable.of(1, 2, 3, 4, 3, 2, 1)
+    .takeLast(3)
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
+```
+
+#### takeWhile
+
+镜像一个 Observable 直到某个元素的判定为 false
+
+```
+输出：1 2 3
+Observable.of(1, 2, 3, 4, 3, 2, 1)
+    .takeWhile { $0 < 4 }
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
+
+```
+
+#### takeUntil
+
+将镜像源 Observable，它同时观测第二个 Observable。一旦第二个 Observable 发出一个元素或者产生一个终止事件，那个镜像的 Observable 将立即终止。
+
+```
+输出：0 1 2
+
+let o1 = Observable<Int>.create({ observer in
+    after(seconds: Double(5)).done {
+        observer.onNext(999)
+        observer.onCompleted()
+    }
+    
+    return Disposables.create()
+})
+
+let o2 = Observable<Int>.timer(0, period: 2, scheduler: MainScheduler.instance)
+
+o2.takeUntil(o1)
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
+```
 
 #### elementAt
 
-
-#### skip
-
-
-#### skipWhile
-
-
-#### skipWhileWithIndex
-
-
-
-#### skipUntil
-
-
-#### sample
-
-
+只发出 Observable 中的第 n 个元素
 
 #### debounce
 
-#### distinctUntilChanged
-
-阻止 Observable 发出相同的元素。如果前后两个元素相同，则后面的元素不会发出来
+过滤掉高频产生的元素
 
 ```
-Observable.of("1", "1", "2", "3", "4", "4")
-    .distinctUntilChanged()
-    .subscribe {
-        print($0)
-    }
-    .disposed(by: bag)
+输出： 0
 
-输出：1 2 3 4                                                
+Observable.of(1, 2, 3, 4, 3, 2, 1)
+    .debounce(0.5, scheduler: MainScheduler.instance)
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
 ```
 
 #### throttle
@@ -326,25 +476,136 @@ let subject = PublishSubject<Int>()
 输出 1 5 6
 ```
 
+#### skip
+
+跳过 Observable 中头 n 个元素
+
+```
+// 输出 3 4 3 2 1
+
+Observable.of(1, 2, 3, 4, 3, 2, 1)
+    .skip(2)
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
+```
+
+#### skipWhile
+
+跳过 Observable 中头几个元素，直到元素的判定为否
+
+```
+// 输出 3 4 3 2 1
+Observable.of(1, 2, 3, 4, 3, 2, 1)
+    .skipWhile() { $0 < 3 }
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
+```
+
+#### skipUntil
+
+跳过 Observable 中头几个元素，直到另一个 Observable 发出一个元素
+
+```
+ // 输出  3 4 5 ..
+o2.skipUntil(o1)
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
+
+```
+
+#### distinctUntilChanged
+
+阻止 Observable 发出相同的元素。如果前后两个元素相同，则后面的元素不会发出来
+
+```
+Observable.of("1", "1", "2", "3", "4", "4")
+    .distinctUntilChanged()
+    .subscribe {
+        print($0)
+    }
+    .disposed(by: bag)
+
+输出：1 2 3 4                                                
+```
+
 #### delay
 
-#### delaySubscription
+将 Observable 的每一个元素拖延一段时间后发出
+
+```
+// 延迟 2 秒，输出 999
+Observable.just(999, scheduler: MainScheduler.instance)
+    .delay(2, scheduler: MainScheduler.instance)
+    .subscribe(onNext: { print($0) })
+    .disposed(by: disposeBag)
+```
 
 #### amb
 
+在多个源 Observables 中，取第一个发出元素或产生事件的 Observable，然后只发出它的元素
+
+![](/assets/img/amb.png)
+
 ### 错误处理
+
+![](/assets/img/retry.png)
+
+#### retry
+
+如果源 Observable 产生一个错误事件，重新对它进行订阅
+
+```
+输出：999 999 999 test(错误)
+let o1 = Observable<Int>.create({ observer in
+    after(seconds: Double(5)).done {
+        observer.onNext(999)
+        observer.onError(TestError.test)
+    }
+    
+    return Disposables.create()
+})
+
+o1.retry(3)
+    .subscribe(onNext: { print($0) }, onError: { print($0) })
+    .disposed(by: disposeBag)
+
+```
 
 #### timeout
 
+如果 Observable 在一段时间内没有产生元素，timeout 操作符将使它发出一个 error 事件。
+
+```
+// 会走 onError 逻辑
+o1.timeout(1, scheduler: MainScheduler.instance)
+    .subscribe(onNext: { print($0) }, onError: { print($0) })
+    .disposed(by: disposeBag)
+
+```
 
 #### catchErrorJustReturn
 
+```
+输出：999 10
+
+let o1 = Observable<Int>.create({ observer in
+    after(seconds: Double(5)).done {
+        observer.onNext(999)
+        observer.onError(TestError.test)
+    }
+    
+    return Disposables.create()
+})
+
+o1.catchErrorJustReturn(10)
+            .subscribe(onNext: { print($0) }, onError: { print($0) })
+            .disposed(by: disposeBag)
+```
 
 #### catchError
 
+从一个错误事件中恢复，将错误事件替换成一个备选序列
 
-
-#### retry
 
 ### 其他
 
