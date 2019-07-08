@@ -548,11 +548,11 @@ Observable.just(999, scheduler: MainScheduler.instance)
 
 ### 错误处理
 
-![](/assets/img/retry.png)
-
 #### retry
 
 如果源 Observable 产生一个错误事件，重新对它进行订阅
+
+![](/assets/img/retry.png)
 
 ```
 输出：999 999 999 test(错误)
