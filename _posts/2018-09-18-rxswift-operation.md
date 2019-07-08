@@ -239,7 +239,7 @@ Observable.repeatElement(3)
 
 #### flatMapLatest
 
-![](/assets/img/ios_12_title.png)
+![](/assets/img/flatMapLatest.png)
 
 参考：https://github.com/baconjs/bacon.js/wiki/Diagrams
 
