@@ -623,42 +623,44 @@ o1.catchErrorJustReturn(10)
 #### connect
 
 
-#### do
-
-
-#### error
-
-
 #### subscribeOn
 
+我们用 subscribeOn 来决定数据序列的构建函数在哪个 Scheduler 上运行
+
+决定 Observable.create() 在哪个线程执行
 
 #### observeOn
 
+决定在哪个 Scheduler 监听这个数据序列
 
-#### single
+决定 observerOn 后面的操作是在哪个线程
 
+```
+let disposeBag = DisposeBag()
+private func test() {
+    let o = Observable<String>.create() { observer in
+        // 子线程执行
+        observer.onNext("1")
+        observer.onNext("2")
+        observer.onNext("3")
+        observer.onCompleted()
 
-#### groupBy
+        return Disposables.create()
+    }
 
+    o.subscribeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+        .observeOn(MainScheduler.instance)
+        .map() { element in
+            return element + "23"   // 主线程执行
+        }
+        .observeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+        .subscribe(onNext: { element in
+            print(element)  // 子线程执行
+        }).disposed(by: disposeBag)
+}
+```
 
-#### window
+### 更多参考：
 
-
-#### buffer
-
-
-#### startWith
-
-
-
-#### ignoreElements
-
-
-
-#### materialize
-
-
-#### dematerialize
-
-
-#### as
+- https://github.com/ReactiveX/RxSwift
+- https://beeth0ven.github.io/RxSwift-Chinese-Documentation/content/decision_tree.html
