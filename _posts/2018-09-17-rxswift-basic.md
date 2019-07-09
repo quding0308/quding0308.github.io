@@ -172,9 +172,45 @@ ObserverType定义了最基本的操作
 
 将在源 Observable 产生完成事件后，发出最后一个元素（仅仅只有最后一个元素），如果源 Observable 没有发出任何元素，只有一个完成事件。那 AsyncSubject 也只有一个完成事件。
 
+```
+输出： 
+subject 3
+
+let subject = AsyncSubject<Int>()
+
+subject.subscribe(onNext: { element in
+    print("subject \(element)")
+}).disposed(by: disposeBag)
+
+Observable.from([1, 2, 3])
+    .subscribe(subject)
+    .disposed(by: disposeBag)
+```
+
 #### PublishSubject
 
 PublishSubject 将对观察者发送订阅后产生的元素，而在订阅前发出的元素将不会发送给观察者。
+
+```
+输出：
+间隔4s
+subject 0 
+间隔4s
+subject 1
+间隔4s
+subject 2
+...
+
+let subject = PublishSubject<Int>()
+
+subject.subscribe(onNext: { element in
+    print("subject \(element)")
+}).disposed(by: disposeBag)
+
+Observable<Int>.interval(4, scheduler: MainScheduler.instance)
+    .subscribe(subject)
+    .disposed(by: disposeBag)
+```
 
 #### ReplaySubject
 
@@ -188,6 +224,29 @@ ReplaySubject 将对观察者发送全部的元素，无论观察者是何时进
 #### BehaviorSubject
 
 当观察者对 BehaviorSubject 进行订阅时，它会将源 Observable 中最新的元素发送出来（如果不存在最新的元素，就发出默认元素）。然后将随后产生的元素发送出来。
+
+```
+输出：
+subject 123 
+间隔4s
+subject 0 
+间隔4s
+subject 1
+间隔4s
+subject 2
+...
+
+let subject = BehaviorSubject(value: 123)
+
+subject.subscribe(onNext: { element in
+    print("subject \(element)")
+}).disposed(by: disposeBag)
+
+Observable<Int>.interval(4, scheduler: MainScheduler.instance)
+    .subscribe(subject)
+    .disposed(by: disposeBag)
+
+```
 
 #### ControlProperty
 
