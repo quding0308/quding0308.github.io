@@ -613,15 +613,60 @@ o1.catchErrorJustReturn(10)
 
 #### publish
 
+将 Observable 转换为 ConnectableObservable
+
+ConnectableObservable 在被订阅后不会发出元素，直到 connect 操作符被应用为止。
+
+![](/assets/img/publish.png)
+
 
 #### replay
 
+![](/assets/img/replay.png)
 
-#### refCount
+#### shareReplay
 
+shareReplay 操作符将使得观察者共享源 Observable，并且缓存最新的 n 个元素，将这些元素直接发送给新的观察者。
+
+当有第一个订阅者时，开始发出 event ，并且缓存数据。之后的订阅者，会首先使用缓存数据。
+
+![](/assets/img/shareReplay.png)
+
+```
+输出：
+1 0
+1 1
+1 2
+1 3
+1 4
+2 3
+2 4
+1 5
+2 5
+1 6
+2 6
+...
+
+let o = Observable<Int>
+        .interval(1, scheduler: MainScheduler.instance)
+        .share(replay: 2)
+
+o.subscribe(onNext: {
+    print("1 \($0)")
+})
+
+after(seconds: 5).done {
+    o.subscribe(onNext: {
+        print("2 \($0)")
+    })
+}
+```
 
 #### connect
 
+通知 ConnectableObservable 可以开始发出元素了
+
+#### share
 
 #### subscribeOn
 
@@ -659,6 +704,23 @@ private func test() {
         }).disposed(by: disposeBag)
 }
 ```
+
+#### reduce
+
+reduce 操作符将对第一个元素应用一个函数。然后，将结果作为参数填入到第二个元素的应用函数中。以此类推，直到遍历完全部的元素后发出最终结果。
+
+```
+Observable.from([1, 2, 3, 4, 5])
+    .reduce(0, accumulator: { result, element in
+        return result + element
+    })
+    .subscribe(onNext: {
+        print($0)
+    })
+    .disposed(by: disposeBag)
+```
+
+#### refCount
 
 ### 更多参考：
 
