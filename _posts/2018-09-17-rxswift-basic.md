@@ -8,23 +8,26 @@ categories: blog RxSwift
 {:toc}
 
 ### Event
-    public enum Event<Element> {
-        case next(Element)  // 序列产生一个新的元素
-        case error(Swift.Error) // 创建序列时报错，seq会终止
-        case completed  // 序列结束
-    }
-
+```
+public enum Event<Element> {
+    case next(Element)  // 序列产生一个新的元素
+    case error(Swift.Error) // 创建序列时报错，seq会终止
+    case completed  // 序列结束
+}
+```
 ### Observable-一个可被观察的序列
 
 ####  Single
 
 - 只能发出一个元素，或一个error事件
 - 不会共享状态变化
-  
-    public enum SingleEvent<Element> {
-        case success(Element)
-        case error(Swift.Error)
-    }
+
+```
+public enum SingleEvent<Element> {
+    case success(Element)
+    case error(Swift.Error)
+}
+```
 
 #### Maybe
 
@@ -43,7 +46,7 @@ categories: blog RxSwift
 - 一定在 MainScheduler 监听（主线程监听）
 - 共享状态变化
 
-``` Swift
+```
 .asDriver(onErrorJustReturn: [])
 等价于
 let safeSequence = xs
@@ -87,84 +90,98 @@ Async Operation、Http Connection等是 Cold Observable 。有了订阅者后才
 用来监听Event，然后对Event做出响应
 
 ObserverType定义了最基本的操作
+```
+public protocol ObserverType {
+    associatedtype E
 
-    public protocol ObserverType {
-        associatedtype E
+    func on(_ event: Event<E>)
+}
 
-        func on(_ event: Event<E>)
+extension ObserverType {
+    public func onNext(_ element: E) {
+        on(.next(element))
     }
-
-    extension ObserverType {
-        public func onNext(_ element: E) {
-            on(.next(element))
-        }
-        
-        public func onCompleted() {
-            on(.completed)
-        }
-        
-        public func onError(_ error: Swift.Error) {
-            on(.error(error))
-        }
+    
+    public func onCompleted() {
+        on(.completed)
     }
-
-
+    
+    public func onError(_ error: Swift.Error) {
+        on(.error(error))
+    }
+}
+```
 
 #### 使用闭包创建观察者
-    
-    // 直接使用闭包 onNext、onError、onCompleted 来创建 
-    tap.subscribe(onNext: { [weak self in
-        print("")
-    }, onError: { error in
-        print("error")
-    }, onCompleted: {
-        print("completed")
-    })
+
+```
+// 直接使用闭包 onNext、onError、onCompleted 来创建 
+tap.subscribe(onNext: { [weak self in
+    print("")
+}, onError: { error in
+    print("error")
+}, onCompleted: {
+    print("completed")
+})
+```
 
 #### 使用 AnyObserver 创建
-实现了 ObserverType 协议，具有以下特点：
 
-    let observer: AnyObserver<String> = AnyObserver(eventHandler: { event in
-        switch event {
-        case .next(let result):
-            print(result)
-        case .completed:
-            print("completed")
-        case .error(let error):
-            print(error)
-        default:
-            break
-        }
-    })
+```
+let observer: AnyObserver<String> = AnyObserver(eventHandler: { event in
+    switch event {
+    case .next(let result):
+        print(result)
+    case .completed:
+        print("completed")
+    case .error(let error):
+        print(error)
+    default:
+        break
+    }
+})
+```
 
 #### 使用 Binder 创建
+
 实现了 ObserverType 协议，具有以下特点：
 - 不会处理 error 和 complete 事件
 - 确保绑定都是在给定 Scheduler 上执行（默认 MainScheduler）
 
+```
+let observer: Binder<Bool> = Binder(view, binding: { (v, isHidden) in
+    v.isHidden = isHidden
+})
+
+// RxSwift中的使用
+extension Reactive where Base: UIView {
+    public var isHidden: Binder<Bool> {
+        return Binder(self.base) { view, hidden in
+            view.isHidden = hidden
+        }
+    }
+}
+
+extension Reactive where Base: UIControl {
+    public var isEnabled: Binder<Bool> {
+        return Binder(self.base) { control, value in
+            control.isEnabled = value
+        }
+    }
+}
+```
+
 示例：
+```
+let o = Observable<Int>.interval(2, scheduler: MainScheduler.instance)
+    .map({ "\($0)" })
 
-    let observer: Binder<Bool> = Binder(view, binding: { (v, isHidden) in
-        v.isHidden = isHidden
-    })
+o.bind(to: label.rx.text)
+    .disposed(by: disposeBag)
 
-    // RxSwift中的使用
-    extension Reactive where Base: UIView {
-        public var isHidden: Binder<Bool> {
-            return Binder(self.base) { view, hidden in
-                view.isHidden = hidden
-            }
-        }
-    }
-
-    extension Reactive where Base: UIControl {
-        public var isEnabled: Binder<Bool> {
-            return Binder(self.base) { control, value in
-                control.isEnabled = value
-            }
-        }
-    }
-
+o.bind(to: textField.rx.text)
+    .disposed(by: disposeBag)
+```
 
 ### Observable & Observer 既是可被监听的序列也是观察者
 
