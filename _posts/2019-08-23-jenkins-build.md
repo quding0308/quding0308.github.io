@@ -215,5 +215,3 @@ pipeline {
 文档：
 
 - 语法规则：https://jenkins.io/zh/doc/book/pipeline/syntax/
-
-## xcodeproj 命令
