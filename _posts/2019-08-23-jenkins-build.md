@@ -10,7 +10,7 @@ categories: blog
 
 ## jenkin 相关设置
 
-### git 来代码前修改参数
+### 在 git 拉去代码前修改参数
 
 设置 Prepare an environment for the run ，可以在 git 拉代码之前修改参数
 
@@ -73,7 +73,7 @@ pipeline {
 }
 ```
 
-### jenkins node 节点管理
+### node 节点管理
 
 - 可以通过“环境变量” 设置不同节点的变量。例如用户名、密码、PATH 等
 - 启动方式 通过 ssh 连接，在 Credential 中设置 node 节点的用户名、密码
