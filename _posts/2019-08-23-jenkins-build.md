@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "iOS 构建相关知识"
+title:  "iOS 构建相关"
 # date:   2018-06-23 10:05:05 +0800
 categories: blog
 ---
