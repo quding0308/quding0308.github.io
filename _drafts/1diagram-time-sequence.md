@@ -1,5 +1,7 @@
 ## 时序图
 
+http://plantuml.com/zh/sequence-diagram
+
 @startuml
 
 participant c as "禅道"
