@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "xcodeproj 命令"
+title:  "iOS 构建 - xcodeproj 命令"
 # date:   2018-06-23 10:05:05 +0800
 categories: blog
 ---
