@@ -7,7 +7,7 @@ categories: blog
 * 目录
 {:toc}
 
-### 测试
+### 介绍
 
 contentMode 属性
 
@@ -22,8 +22,8 @@ contentMode 属性
 
 ![](/assets/img/contentmode/default@2x.png)
 
-
-### top topLeft topRight
+### 属性值
+#### top topLeft topRight
 
 top 为 topCenter
 
@@ -43,7 +43,7 @@ top 为 topCenter
 | (0,0,300,200)  | 图片全部显示，imageView下面有50px显示空白 | ![](/assets/img/contentmode/300-200.png)|
 
 
-### bottom bottomLeft bottomRight
+#### bottom bottomLeft bottomRight
 
 bottom 为 bottomCenter
 
@@ -51,7 +51,7 @@ bottom 为 bottomCenter
 
 bottomLeft 会基于图片的左下角为参照点对图片做裁剪
 
-### center
+#### center
 
 center 以图片的中心为参照点对图片做裁剪，不会拉升或压缩图片
 
@@ -63,7 +63,7 @@ center 以图片的中心为参照点对图片做裁剪，不会拉升或压缩�
 | (0,0,300,200)  | 图片全部显示，imageView左右各留25px的空白 | ![](/assets/img/contentmode/center-300-200.png)|
 
 
-### scaleToFill
+#### scaleToFill
 
 图片不做裁剪，通过拉伸或压缩图片来适应 imageview 的宽高
 
@@ -75,7 +75,7 @@ center 以图片的中心为参照点对图片做裁剪，不会拉升或压缩�
 | (0,0,400,150)  | 图片水平被拉伸 | ![](/assets/img/contentmode/scaleToFill-400-150.png) |
 
 
-### scaleAspectFill
+#### scaleAspectFill
 
 scale aspect 按比例伸缩
 
@@ -86,7 +86,7 @@ scaleAspectFill 按比例伸缩，图片完全填充满 imageView ，部分图�
 | (0,0,300,150)  | 图片正好全部显示 | ![](/assets/img/contentmode/default@2x.png) |
 | (0,0,300,75)  | 图片上下部分被裁减了37.5px | ![](/assets/img/contentmode/scaleAspectFill-300-75.png) |
 
-### scaleAspectFit
+#### scaleAspectFit
 
 scaleAspectFill 按比例伸缩，图片填充满 imageView，图片不会被裁掉，不够的部分填充空白
 
