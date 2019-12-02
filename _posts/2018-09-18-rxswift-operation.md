@@ -7,7 +7,7 @@ categories: blog RxSwift
 * 目录
 {:toc}
 
-### 创建Observable
+### 创建 Observable
 
 #### create
 自定义一个Observable的逻辑
@@ -213,9 +213,14 @@ private func test() {
 }
 ```
 
-### 转换Observable
+### 转换 Observable
 
 #### map
+
+Projects each element of an observable sequence into a new form.
+
+Returns An observable sequence whose elements are the result of invoking the transform function on each element of source.
+
 ```
     Observable.of(1, 2, 3)
         .map { $0 * 10 }
@@ -224,7 +229,9 @@ private func test() {
 ```
 #### flatMap
 
-flatMap 闭包会返回 Observable，然后所有 Observable 合称为一个 Observable 作为结果
+flatMap 闭包会返回 Observable，然后所有 Observable 组成为一个 Observable 作为
+
+Projects each element of an observable sequence to an observable sequence and merges the resulting observable sequences into one observable sequence.
 
 ```
 Observable.repeatElement(3)
@@ -238,6 +245,7 @@ Observable.repeatElement(3)
 ```
 
 #### flatMapLatest
+
 
 ![](/assets/img/flatMapLatest.png)
 
@@ -337,20 +345,32 @@ private func test() {
     }).disposed(by: disposeBag)
 }
 ```
+#### reduce
+
+类似 Swift 中的 reduce 函数。把 Observable 作为 collection， 遍历元素，返回一个 result
+
+```
+let o1 = Observable<Int>.of(1, 2, 3)
+
+o1.reduce(0, accumulator: { (pre, element) in
+    return pre + element
+})
+.subscribe { (result) in
+    print("result \(result)")
+}
+.disposed(by: disposeBag)
+```
 
 #### scan
-对每个元素 遍历操作 应用一个函数。
 
-这个函数有一个初始值，之后会把每个元素 和 上次的结果作为参数传进去。
-
-该操作 跟 reduce、accumulator 有点类似，入参都一样。但 reduce 最后只返回一个累积的结果，scan 会返回一个 Observable
+跟 reduce 类似，入参一样，但 reduce 只返回一个累积的结果，而 scan 会返回一个 Observable 
 
 ```
 // 输出：0 1 3 6 10 15 21 28 ..
-let observable2 = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
+let o2 = Observable<Int>.interval(1, scheduler: MainScheduler.instance)
 
-observable2.scan(0) { (first, element) in
-    return first + element
+o2.scan(0) { (pre, element) in
+    return pre + element
     }.subscribe(onNext: { value in
         print("\(value)")
     })
@@ -436,13 +456,15 @@ o2.takeUntil(o1)
 
 #### debounce
 
-过滤掉高频产生的元素
+防抖动  
+当一次事件发生后，事件处理器要等一定阈值的时间，如果这段时间过去后 再也没有事件发生，就处理最后一次发生的事件  
+假设还差 0.01 秒就到达指定时间，这时又来了一个事件，那么之前的等待作废，需要重新再等待指定时间
 
 ```
-输出： 0
+输出： 5
 
-Observable.of(1, 2, 3, 4, 3, 2, 1)
-    .debounce(0.5, scheduler: MainScheduler.instance)
+Observable.of(1, 2, 3, 4, 5)
+    .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
     .subscribe(onNext: { print($0) })
     .disposed(by: disposeBag)
 ```
@@ -450,31 +472,20 @@ Observable.of(1, 2, 3, 4, 3, 2, 1)
 #### throttle
 
 限流  在一定时间内，只输出 第一条和最后一条，中间的忽略。
+当触发一个事件后，要等一定的阈值时间，然后再发送当前最新的事件。
 
 适用于：输入框搜索限制发送请求。
 
 ```
-let subject = PublishSubject<Int>()
-        subject.throttle(2, scheduler: MainScheduler.instance)
-        .subscribe {
-            print($0)
-        }
-        .disposed(by: bag)
+输出 0 1 3 4 6 7 9 ..
+
         
-        subject.onNext(1)
-        subject.onNext(2)
-        subject.onNext(3)
-        subject.onNext(4)
-        
-        after(seconds: 1).done {
-            subject.onNext(5)
-        }
-        
-        after(seconds: 3).done {
-            subject.onNext(6)
-        }
-        
-输出 1 5 6
+let o2 = Observable<Int>.interval(2, scheduler: MainScheduler.instance)
+o2.throttle(RxTimeInterval.seconds(3), scheduler: MainScheduler.instance)
+.subscribe { (result) in
+    print("result \(result)")
+}
+.disposed(by: disposeBag)
 ```
 
 #### skip
@@ -516,7 +527,9 @@ o2.skipUntil(o1)
 
 #### distinctUntilChanged
 
-阻止 Observable 发出相同的元素。如果前后两个元素相同，则后面的元素不会发出来
+阻止 Observable 发出相同的元素，如果前后两个元素相同，则后面的元素不会发出来
+
+distinct // 有改变
 
 ```
 Observable.of("1", "1", "2", "3", "4", "4")
