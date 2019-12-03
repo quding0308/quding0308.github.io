@@ -58,6 +58,12 @@ return Driver(raw: safeSequence)           // 封装
 
 参考：https://beeth0ven.github.io/RxSwift-Chinese-Documentation/content/rxswift_core/observable/driver.html
 
+#### BehaviorRelay
+
+BehaviorRelay is a wrapper for `BehaviorSubject`. Unlike `BehaviorSubject` it can't terminate with error or completed.
+
+BehaviorRelay 是 Observable 
+
 #### ControlEvent
 
 专门用于描述UI控件所产生的事件，具有以下特征：
