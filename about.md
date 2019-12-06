@@ -14,4 +14,4 @@ Github
 <https://github.com/quding0308>
 
 文档   
-<https://study.quding0308.com>
+<https://book.quding0308.com>
