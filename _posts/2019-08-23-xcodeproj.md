@@ -534,6 +534,3 @@ arrayPBXShellScriptBuildPhase = target.shell_script_build_phases
 # 所有的改动最后都需要调用 project.save 才会生效
 project.save
 ```
-
-## 参考：
-- https://www.jianshu.com/p/cca701e1d87c
