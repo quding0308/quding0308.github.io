@@ -4,6 +4,9 @@ title:  "iOS Runtime 相关"
 categories: blog
 ---
 
+* 目录
+{:toc}
+
 ## 编译运行 objc4
 
 参考：
@@ -133,11 +136,12 @@ NSMutableString 如果使用 copy 修饰，在 setter 中会有 [name copy] 的�
 ```
 
 测试：
+
 ```
 BOOL kindObj = [[NSObject class] isKindOfClass:[NSObject class]];  // YES
 BOOL kindTemp = [[Student class] isKindOfClass:[Student class]];    // NO
 [[Student class] isKindOfClass:[NSObject class]];       // YES
-``
+```
 
 参考：https://www.jianshu.com/p/0b14c53fde22
 
@@ -162,8 +166,20 @@ runtime 源码：
 }
 ```
 
+## 在子线程中执行 performSelector:withObject:afterDelay
+
+```
+[self performSelector:@selector(test111) withObject:nil afterDelay:3];
+[[NSRunLoop currentRunLoop] runUntilDate:NSDate.distantFuture];
+```
+
+
 ## isProxy 作用
 
 
 ## NSObject 的方法
 
+
+## runtime_initialize方法与load方法的区别
+
+https://blog.csdn.net/shorewb/article/details/52081178
