@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "iOS Runtime 相关"
+title:  "iOS 相关"
 categories: blog
 ---
 
@@ -183,3 +183,10 @@ runtime 源码：
 ## runtime_initialize方法与load方法的区别
 
 https://blog.csdn.net/shorewb/article/details/52081178
+
+## @dynamic 与 @synthesize 的区别
+
+@synthesize will generate getter and setter methods for your property. @dynamic just tells the compiler that the getter and setter methods are implemented not by the class itself but somewhere else (like the superclass or will be provided at runtime).
+
+Some accessors are created dynamically at runtime, such as certain ones used in CoreData's NSManagedObject class. If you want to declare and use properties for these cases, but want to avoid warnings about methods missing at compile time, you can use the @dynamic directive instead of @synthesize.
+The @synthesize directive, on the other hand, generates the accessor methods for you at compile time
